@@ -1,0 +1,128 @@
+.login-container {
+  width: 60%;
+  margin: 0 auto;
+  padding-top: 35px;
+} 
+
+.top-login-container {
+  width: 100%;
+  /* height: 100px; */
+  height: 40px;
+  text-align: center;
+  display: flexbox;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #2D3E50;
+}
+
+.top-login-container h2 {
+  color: #e4e4e4;
+  padding-top: 7px;
+}
+.top-login-container p {
+  color: #dadada;
+}
+
+.body-login-container {
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  background-color: white;
+  display: flex;
+}
+.body-login-container img {
+  width: 40%;
+  object-fit:scale-down;
+  pointer-events: none;      /* não permite clique */
+  user-select: none;         /* não permite selecionar */
+  -webkit-user-drag: none;   /* impede arrastar a imagem */
+}
+
+.login-card {
+  width: 100%;
+  text-align: center;
+  background: #FEFCF9;
+  padding: 30px;
+  display:grid;
+  flex-direction: column;
+}
+
+.login-card input {
+  margin-bottom: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.login-card label {
+  text-align: left;
+  padding: 5px;
+}
+
+.login-card button {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #F47C48;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+.login-card button:hover {
+  background-color: #d45a3b;
+}
+
+.lembrar-me {
+  width: 100%;
+  display: flex;
+}
+.lembrar-me span {
+  font-size: 14px;
+  font-weight: 400;
+  pointer-events: none;      /* não permite clique */
+  user-select: none;         /* não permite selecionar */
+  -webkit-user-drag: none;   /* impede arrastar a imagem */
+}
+
+.bot-login-card {
+  width: 100%;
+  margin-top: 20px;
+  border-top: 1px solid #94534339;
+}
+.bot-login-card p {
+  font-size: 14px;
+}
+.bot-login-card span {
+  font-size: 15px;
+  font-weight: 600;
+  color: #d45a3b;
+}
+
+/* -------- */
+.extra-img-natal img {
+  width: 120px;
+  margin-top: -35px;
+  margin-left: -50px;
+  position:fixed;
+  pointer-events: none;      /* não permite clique */
+  user-select: none;         /* não permite selecionar */
+  -webkit-user-drag: none;   /* impede arrastar a imagem */
+  transform: rotate(-4deg);
+}
+
+/* -------- */
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .login-container {
+    width: 90%;
+  }
+  .body-login-container img {
+    display: none;
+  }
+  .login-card {
+    width: 100%;
+  }
+  
+}

@@ -1,0 +1,120 @@
+.management {
+    width: 100%;
+    min-height: 92dvh; /* permite crescimento sem quebrar */
+    height: auto;
+}
+
+.top-management {
+    padding: 20px 40px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.text-content {
+    max-width: 50%;
+}
+.text-content h3 {
+    color: #FF7A59;
+}
+.text-content h1 {
+    font-size: 30px;
+}
+
+.feature-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.top-management-card {
+    width: 160px;
+    padding: 15px;
+    background: #f6f6f6;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform .2s ease;
+}
+
+.top-management-card:hover {
+    transform: translateY(-4px);
+}
+
+.top-management-card h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #273544;
+}
+
+.top-management-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.section-management {
+    width: 100%;
+    min-height: 200px; /* começa com 200, mas aumenta conforme necessário */
+    height: auto;
+}
+
+.management-menu {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    box-shadow: 0 0 2px rgba(0,0,0,0.1);
+}
+.management-menu ul {
+    display: flex;
+    gap: 30px;                        /* espaço entre itens */
+    list-style: none;
+    margin: 0;
+    margin-left: 40px;
+    padding: 2px;
+}
+
+.management-menu li {
+    cursor: pointer;
+    font-size: 14px;
+    color: #525050;
+    transition: 0.2s;
+    padding-bottom: 3px;
+}
+
+/* Hover */
+.management-menu li:hover {
+    color: #273544;
+}
+
+/* 🔵 Item selecionado */
+.management-menu li.active {
+    color: #273544;
+    font-weight: 600;
+    border-bottom: 2px solid #273544;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+    .top-management {
+        flex-direction: column;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .feature-cards {
+        flex-wrap: wrap;
+    }
+
+    .top-management-card {
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .top-management-card {
+        width: 100%;
+    }
+}

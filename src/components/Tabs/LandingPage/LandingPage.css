@@ -1,0 +1,125 @@
+.dashboard-home {
+    width: 100%;
+    /* padding: 40px 6vw; */
+    font-family: "Poppins", sans-serif;
+    color: #000000;
+}
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome-box h2 {
+    font-size: 28px;
+    margin-bottom: 4px;
+    color: rgb(60, 60, 60);
+}
+
+.welcome-box p {
+    margin: 0;
+    color: #94a3b8;
+}
+
+.welcome-box .sub {
+    margin-top: 6px;
+    margin-bottom: 24px;
+    max-width: 650px;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.quick-cards {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.card {
+    background: #1E2A36;
+    padding: 24px;
+    width: 260px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: #253542;
+    transform: translateY(-4px);
+}
+
+.card h3 {
+    margin-top: 16px;
+    color: #f1f5f9;
+}
+
+.card p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* Icon Containers */
+.icon-area {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+}
+
+.icon-area.blue { background: #1e40af; color: #93c5fd; }
+.icon-area.green { background: #065f46; color: #a7f3d0; }
+.icon-area.yellow { background: #854d0e; color: #fcd34d; }
+
+/* =========================
+   Activities
+========================= */
+
+.section-title h3 {
+    margin-bottom: 14px;
+    color: rgb(60, 60, 60);
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #1E2A36;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.activity-item strong {
+    color: #e2e8f0;
+}
+
+.activity-item p {
+    margin: 0;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.activity-icon {
+    font-size: 22px;
+    color: #38bdf8;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+}

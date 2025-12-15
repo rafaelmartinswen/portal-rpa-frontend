@@ -1,0 +1,104 @@
+/* CARD BASE */
+.robot-card {
+  width: 45%;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: 10px solid #2D3E50;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  padding: 20px;
+  margin-top: 1.5rem;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.robot-card:hover {
+  transform: translateY(-3px);
+}
+
+.robot-card-content {
+  cursor: pointer;
+}
+
+/* HEADER */
+.robot-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.robot-card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* BADGE AREAS */
+.area-badge {
+  min-width: 75px;
+  padding: 5px 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 8px;
+  color: #111;
+  font-weight: 500;
+}
+
+/* Paleta unificada */
+.area-badge.Financeiro  { background: #a7edd6; }
+.area-badge.Fiscal      { background: #e5eda7; }
+.area-badge.Folha       { background: #a7cfed; }
+.area-badge.GRSA        { background: #daa7ed; }
+.area-badge.Juridico    { background: #eda7bc; }
+
+/* DESCRIPTION */
+.robot-description {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 10px 0 15px;
+}
+
+/* INFO ROWS */
+.robot-info .info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+}
+
+.info-label {
+  color: #6b7280;
+}
+
+.info-value {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* ACTION BUTTON */
+.robot-card-actions {
+  margin-top: 15px;
+}
+
+.robot-card-actions button {
+  width: 100%;
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.robot-card-actions button:hover {
+  background: #fecaca;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+  .robot-card {
+    width: 100%;
+  }
+}

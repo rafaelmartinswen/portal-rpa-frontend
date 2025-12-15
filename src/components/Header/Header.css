@@ -1,0 +1,197 @@
+/* =====================================
+   BASE DO HEADER
+===================================== */
+.header {
+    height: 80px;
+    background: #1E2A36; /* Cor principal */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 6vw;
+    position: sticky;
+    top: 0;
+    z-index: 300;
+    font-family: "Poppins", sans-serif;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* =====================================
+   LEFT SIDE
+===================================== */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo-wrapper {
+    width: 48px;
+    height: 48px;
+    background: #273544;
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 0 12px rgba(0, 0, 0, 0.25),
+        inset 0 0 4px rgba(255, 255, 255, 0.05);
+}
+
+.logo-icon {
+    width: 26px;
+    height: 26px;
+    color: #E5E9F0; /* off-white tech */
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.header-title p {
+    margin: 0;
+    font-size: 0.78rem;
+    color: #9AA4B2;
+}
+
+/* =====================================
+   DESKTOP NAV
+===================================== */
+.desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-link {
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    color: #C9D1D9;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.nav-link:hover {
+    color: #FFFFFF;
+    transform: translateY(-2px);
+}
+
+/* Primary Button */
+.btn-primary {
+    padding: 10px 20px;
+    background: #FF7A59;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    color: white;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #d45a3b;
+    transform: translateY(-2px);
+}
+
+/* =====================================
+   PROFILE CARD
+===================================== */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px 6px 6px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.profile-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #FF7A59;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 13px;
+    color: #FFFFFF;
+}
+
+.role {
+    font-size: 11px;
+    color: #9AA4B2;
+}
+
+/* =====================================
+   MOBILE NAV ICON
+===================================== */
+.mobile-icon {
+    display: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* =====================================
+   MOBILE NAV
+===================================== */
+.mobile-nav {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: #1E2A36;
+    display: flex;
+    flex-direction: column;
+    padding: 22px 0;
+    gap: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.mobile-link {
+    background: none;
+    border: none;
+    font-size: 1.05rem;
+    color: #C9D1D9;
+    padding: 10px 0;
+}
+
+.mobile-primary {
+    background: #3D7DFF;
+    border: none;
+    color: white;
+    padding: 12px;
+    margin: 0 20px;
+    border-radius: 10px;
+}
+
+/* =====================================
+   BREAKPOINTS
+===================================== */
+@media (max-width: 880px) {
+    .desktop-nav {
+        display: none;
+    }
+    .mobile-icon {
+        display: block;
+    }
+}

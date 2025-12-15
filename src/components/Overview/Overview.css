@@ -1,0 +1,216 @@
+.overview {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* ---------------------- */
+/* ALERTA */
+/* ---------------------- */
+.ov-alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.ov-alert-warning {
+    background: #fff4e5;
+    border-left: 4px solid #ff9800;
+    color: #b86100;
+}
+
+.logBox {
+  background: #222;
+  padding: 15px;
+  color: #0f0;
+  font-family: monospace;
+  border-radius: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+/* ---------------------- */
+/* AÇÕES RÁPIDAS */
+/* ---------------------- */
+.ov-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.ov-actions button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #fafafa;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.ov-actions button:hover {
+    background: #f0f0f0;
+}
+
+/* ---------------------- */
+/* KPI GRID */
+/* ---------------------- */
+.ov-kpi-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.ov-kpi {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.ov-kpi-number {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.ov-green {
+    color: #1a8d1a;
+}
+
+.ov-kpi-label {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ---------------------- */
+/* GRÁFICO */
+/* ---------------------- */
+.chart-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+
+.ov-chart {
+    margin-top: 22px;
+    background: #fff;
+    padding: 22px;
+    border-radius: 10px;
+    border-bottom: 8px solid #2D3E50;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.ov-chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.ov-chart-placeholder {
+    width: 100%;
+    height: 300px;
+    /* 🔥 altura real do gráfico — pode aumentar */
+    position: relative;
+    /* necessário para o Chart.js */
+}
+
+.ov-chart-placeholder canvas {
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Header do gráfico (título + filtros) */
+.ov-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+/* Container dos inputs */
+.ov-chart-filters {
+    display: flex;
+    gap: 10px;
+}
+
+/* Inputs de data */
+.date-input {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ---------------------- */
+/* ACTIVITIES */
+/* ---------------------- */
+.ov-activity {
+    margin-top: 20px;
+    background: #fff;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.ov-activity-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.ov-activity-item {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.ov-activity-item:last-child {
+    border-bottom: none;
+}
+
+/* ---------------------- */
+/* MOBILE FIX */
+/* ---------------------- */
+@media (max-width: 480px) {
+    .ov-actions {
+        flex-direction: column;
+    }
+
+    .ov-kpi-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .inv-card {
+        width: 100% !important;
+    }
+
+    .chart-container {
+        flex-direction: column;  /* Um em cima do outro */
+        gap: 30px;               /* Aumenta o espaço entre eles */
+    }
+
+    .chart-container > div {
+        width: 100%;
+    }
+
+    .ov-chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .ov-chart-filters {
+        width: 100%;
+    }
+
+    .date-input {
+        width: 100%;
+    }
+}

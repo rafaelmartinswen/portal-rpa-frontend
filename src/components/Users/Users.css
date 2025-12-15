@@ -1,0 +1,45 @@
+.users {
+    width: 100%;
+}
+
+.user-area {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 2px;
+    border: none;
+    cursor: default;
+
+    color: white;
+    font-weight: 500;
+    background: gray; /* será sobrescrito por .on ou .off */
+
+    pointer-events: none; /* evita clique acidental */
+}
+
+.btn.edit {
+    background: #e8f0fe;
+    color: #1a73e8;
+}
+.btn.edit:hover {
+    background: #d2e3fc;
+}
+
+.btn.delete {
+    background: #fde8e8;
+    color: #d93025;
+}
+.btn.delete:hover {
+    background: #f9d3d3;
+}
+
+/* Cores das áreas */
+.user-area.Financeiro       { background: #a7edd6; }
+.user-area.Fiscal           { background: #e5eda7; }
+.user-area.Folha            { background: #a7cfed; }
+.user-area.GRSA             { background: #daa7ed; }
+.user-area.Juridico         { background: #eda7bc; }
+.user-area.Administrador    { background: #f57d8b; }

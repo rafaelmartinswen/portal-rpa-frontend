@@ -1,0 +1,214 @@
+.virtualmachines {
+    width: 100%;
+}
+
+.section-cards {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 🔥 duas colunas sempre */
+    gap: 20px;
+
+    max-height: 340px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.VM-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 60px;
+    padding: 15px;
+    background: #f6f6f6;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    gap: 15px;
+}
+
+/* STATUS BUTTON (canto superior direito) */
+.vm-status {
+    position: absolute;
+    top: 6px;          /* agora fica dentro */
+    right: 6px;        /* agora fica dentro */
+
+    padding: 2px 8px;
+    font-size: 11px;
+    border-radius: 2px;
+    border: none;
+    cursor: default;
+
+    color: white;
+    font-weight: 500;
+    background: gray; /* será sobrescrito por .on ou .off */
+
+    pointer-events: none; /* evita clique acidental */
+}
+
+
+/* Cores do status */
+.vm-status.on {
+    color: #4caf50;
+    background: #4caf4f57; /* verde */
+}
+
+.vm-status.off {
+    color: #f44336;
+    background: #f443365e; /* vermelho */
+}
+
+
+/* Ícone à esquerda */
+.vm-icon {
+    font-size: 32px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.vm-icon-img {
+    width: 60px;
+    height: 60px;
+}
+
+/* Texto no meio */
+.vm-info {
+    flex: 1;
+}
+
+.vm-info h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #273544;
+}
+
+.vm-info p {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Botões à direita */
+.vm-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.btn.start {
+    background: #4caf50;
+    color: white;
+}
+
+.btn.stop {
+    background: #f44336;
+    color: white;
+}
+
+.btn.restart {
+    background: #ff9800;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.button-qtd-vms {
+    width: 4rem;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    background: #FF7A59;
+    color: white;
+    font-weight: 500;
+}
+
+.confirmacao-container {
+  text-align: center;
+  padding: 20px 30px;
+  color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.confirmacao-icon {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid #f5a623;
+  color: #f5a623;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px auto;
+}
+
+.confirmacao-container h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.confirmacao-container p {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.confirmacao-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.btn-sim,
+.btn-nao {
+  padding: 10px 26px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.btn-sim {
+  background-color: #0d6efd;
+}
+
+.btn-nao {
+  background-color: #dc3545;
+}
+
+.btn-sim:hover {
+  background-color: #0b5ed7;
+}
+
+.btn-nao:hover {
+  background-color: #bb2d3b;
+}
+
+
+@media (max-width: 480px) {
+    .section-cards {
+        grid-template-columns: repeat(1, 1fr); /* 🔥 apenas uma coluna sempre */
+    }
+    .VM-card {
+        max-width: 100%;
+    }
+    .vm-info h4 {
+        font-size: 12px;
+    }
+    .vm-info p {
+        font-size: 10px;
+    }
+}

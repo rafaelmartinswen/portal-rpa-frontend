@@ -1,0 +1,148 @@
+.specificproject {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* HEADER */
+.topo-specificproject {
+    background: #f3f4f6;
+    border-top: 8px solid #2D3E50;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border-radius: 12px 12px 0 0;
+}
+
+.topo-specificproject h1 {
+  font-size: 22px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.topo-specificproject button {
+    margin-left: auto;
+    margin-right: 20px;
+    height: 32px;
+    cursor: pointer;
+    border: 1px solid #0b671f;
+    padding: 0 12px;
+    border-radius: 4px;
+    background: rgb(189, 241, 197);
+    color: #0b671f;
+    transition: 0.3s;
+}
+
+.topo-specificproject button:hover {
+    background: #0b671f;
+    color: #fff;
+}
+
+/* INSIGHTS */
+.insights-specificproject {
+    display: flex;
+    padding: 10px 0;
+    background: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.item-insights {
+    width: 33%;
+    text-align: center;
+    padding: 15px 0;
+    background: #f0f0f0;
+    border-radius: 12px;
+    margin: 5px;
+}
+
+.item-insights span {
+    font-size: 28px;
+    font-weight: 600;
+    color: green;
+}
+
+.text-danger {
+    color: rgb(225, 48, 48) !important;
+}
+
+/* CARDS */
+.scheduler-card {
+    margin-top: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.scheduler-card-header {
+    padding: 10px 20px;
+    display: flex;
+    background: #2D3E50;
+    color: white;
+    border-radius: 12px 12px 0 0;
+}
+
+.scheduler-card-header button {
+    margin-left: auto;
+    margin-top: 15px;
+    width: 4rem;
+    height: 30px;
+    border: none;
+    border-radius: 4px;
+    background: #FF7A59;
+    color: white;
+    font-weight: 500;
+}
+
+.scheduler-card-body {
+    padding: 15px;
+}
+
+/* TABELAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.scheduler-th-name p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+.status button {
+    padding: 4px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: default;
+}
+
+.status.waiting button {
+    background: #FFD966;
+    color: #5A5200;
+}
+
+.status.processing button {
+    background: #85C1FF;
+    color: #003B73;
+}
+
+.status.processed button {
+    background: #9AFF9A;
+    color: #0F5F0F;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .insights-specificproject { flex-direction: column; }
+    .item-insights { width: 90%; }
+}
