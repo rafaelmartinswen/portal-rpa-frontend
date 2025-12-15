@@ -28,7 +28,9 @@ jobs:
       - name: Build React App
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-        run: npm run build
+        run: |
+          echo "API URL: $REACT_APP_API_URL"
+          npm run build
 
       - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
@@ -37,5 +39,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
-          api_location: ""
           output_location: "build"
+          skip_app_build: true   # 🔥 impede rebuild sem variável
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}  # 🔥 envia para o Azure também
