@@ -40,6 +40,5 @@ jobs:
           action: "upload"
           app_location: "/"
           output_location: "build"
-          skip_app_build: true   # 🔥 impede rebuild sem variável
         env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}  # 🔥 envia para o Azure também
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
