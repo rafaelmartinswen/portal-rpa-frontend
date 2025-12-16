@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { RiRobot3Fill } from "react-icons/ri";
 import { FiPlayCircle, FiClock, FiActivity } from "react-icons/fi";
 
-function LandingPage({ user }) {
+function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
 
     useEffect(() => {
@@ -37,14 +37,14 @@ function LandingPage({ user }) {
             {/* Cards principais */}
             <div className="quick-cards">
 
-                <div className="card">
+                <div className="card" onClick={() => onTabChange("projects")}>
                     <div className="icon-area blue">
                         <RiRobot3Fill />
                     </div>
                     <h3>Robôs Ativos</h3>
                     <p>Gerencie e monitore todos os robôs configurados.</p>
                 </div>
-
+                
                 <div className="card">
                     <div className="icon-area green">
                         <FiPlayCircle />
@@ -53,7 +53,16 @@ function LandingPage({ user }) {
                     <p>Inicie execuções sob demanda com segurança.</p>
                 </div>
 
-                <div className="card">
+                <div
+                    className="card"
+                    onClick={() => {
+                        if (user.role === "Administrador") {
+                            onTabChange("scheduler");
+                        } else {
+                            alert("Acesso permitido apenas para administradores.");
+                        }
+                    }}
+                >
                     <div className="icon-area yellow">
                         <FiClock />
                     </div>

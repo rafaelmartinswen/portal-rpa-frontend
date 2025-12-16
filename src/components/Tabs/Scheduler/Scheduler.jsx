@@ -17,7 +17,7 @@ function Scheduler() {
   return (
     <div className="scheduler">
       <div className="topo-tabs">
-        <h2>Scheduler</h2>
+        <h2>Agendamentos</h2>
         <label className="toggle">
           <input 
             type="checkbox"
@@ -30,7 +30,7 @@ function Scheduler() {
           </span>
         </label>
       </div>
-      {typeScheduler === "agenda" ? <SchedulerAgenda /> : days.map((day) => (
+      {typeScheduler == "agenda" ? <SchedulerAgenda /> : days.map((day) => (
         <SchedulerCard cod={day.cod} day={day.name}/>
       ))}
     </div>

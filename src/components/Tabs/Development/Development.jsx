@@ -4,11 +4,12 @@ import RobotCard from "../../RobotCard/RobotCard";
 import AddProjectModal from "../../AddProjectModal/AddProjectModal"; // JS normal
 import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
 
-function Development() {
+function Development( {user} ) {
   const [robots, setRobots] = useState([]);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     updateRobotsList();
@@ -18,7 +19,9 @@ function Development() {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {method: 'DELETE',});
+      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
+        method: 'DELETE',
+      });
 
       // Recarrega a lista completa de robôs
       updateRobotsList()
@@ -47,20 +50,31 @@ function Development() {
         index === self.findIndex((r) => r.Nome === robot.Nome) // remove duplicados
   );
 
+  const filteredRobots = robotsUnique.filter(robot =>
+    robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
+    robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
+    robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div className="development">
       {isInfoOpen && <RobotInfoModal robot={robotInfo} onClose={() => setIsInfoOpen(false)}/>}
       {isAddOpen && <AddProjectModal onClose={() => setIsAddOpen(false)} ambiente="Dev"/>}
 
-      <div className="topo-tabs">
-        <h2>Robôs em Desenvolvimento</h2>
+      <div className='search-tabs'>
+        <input 
+          type='text' 
+          placeholder='Pesquisar' 
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
       </div>
 
       <div className="production-cards" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        {robotsUnique.length > 0 ? (
-          robotsUnique.map((robot) => (
-            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} />
+        {filteredRobots.length > 0 ? (
+          filteredRobots.map((robot) => (
+            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} user={user}/>
           ))
         ) : (
           <div className="empty-robots" style={{ textAlign: "center", width: "100%", padding: "48px 0" }}>

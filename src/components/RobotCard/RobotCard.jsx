@@ -1,6 +1,6 @@
 import "./RobotCard.css";
 
-function RobotCard({ robot, onDelete, openInfo }) {
+function RobotCard({ robot, onDelete, openInfo, user, onTabChange }) {
   const {
     Id,
     Nome,
@@ -36,7 +36,12 @@ function RobotCard({ robot, onDelete, openInfo }) {
       </div>
 
       <div className="robot-card-actions">
-        <button onClick={() => onDelete(Id)}>Excluir</button>
+        {robot.Ambiente != 'Dev' && (
+          <button className="btn-left" onClick={() => onTabChange(robot.Sigla_DB)}>Processamento</button>
+        )}
+        {user.role === "Administrador" && (
+          <button className="btn-delete" onClick={() => onDelete(Id)}>Excluir</button>
+        )}
       </div>
     </div>
   );

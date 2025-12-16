@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Projects.css";
 import Production from "../Production/Production";
 import Development from "../Development/Development";
@@ -14,13 +14,13 @@ function Projects ( {user, onTabChange} ) {
         <div className="projects">
 
             <div className="topo-tabs">
-                <h2>Robôs em {typeProject === 'Prod' ? 'Produção' : 'Desenvolvimento'}</h2>
+                <h2>Robôs em {typeProject == 'Prod' ? 'Produção' : 'Desenvolvimento'}</h2>
                 <label className="toggle">
                 <input 
                     type="checkbox"
                     checked={typeProject === "Dev"}
                     onChange={handleToggle}
-                    disabled={user.role !== 'Administrador'}
+                    disabled={user.role != 'Administrador'}
                 />
                 <span className="slider">
                     <span className="on">Prod</span>
@@ -29,7 +29,7 @@ function Projects ( {user, onTabChange} ) {
                 </label>
             </div>
 
-            {typeProject === "Prod" ? <Production user={user} onTabChange={onTabChange}/> : <Development user={user}/>}
+            {typeProject == "Prod" ? <Production user={user} onTabChange={onTabChange}/> : <Development user={user}/>}
         </div>
     );
 }

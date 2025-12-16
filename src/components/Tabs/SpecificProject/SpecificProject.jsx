@@ -1,11 +1,22 @@
 import { useEffect, useState, useCallback } from "react";
 import { gerarExcel } from "../../../utils/excel";
+import ChartProcessing from "../../Charts/ChartProcessing";
+import ChartStatus from "../../Charts/ChartStatus";
 import "./SpecificProject.css";
 
 function SpecificProject({ project }) {
     const [listaInicial, setListaInicial] = useState([]);
     const [logExec, setLogExec] = useState([]);
     const [logInconsistencias, setLogInconsistencias] = useState([]);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+
+    const today = new Date();
+    const todayISO = today.toISOString().split("T")[0];
+
+    const minRange = new Date();
+    minRange.setDate(minRange.getDate() - 30);
+    const minRangeISO = minRange.toISOString().split("T")[0];
 
     const fetchData = useCallback(async (url, setter) => {
         try {
@@ -44,15 +55,105 @@ function SpecificProject({ project }) {
         return () => clearInterval(interval);
     }, [project, fetchData]);
 
+    const logExecToday = logExec.filter((item) => {
+        const date = new Date(item.Data_Processo);
+
+        // Data convertida para horário local
+        const itemDateLocal = date.toLocaleDateString("pt-BR")
+            .split("/")
+            .reverse()
+            .join("-");  // vira YYYY-MM-DD
+
+        const todayLocal = new Date()
+            .toLocaleDateString("pt-BR")
+            .split("/")
+            .reverse()
+            .join("-");
+
+        return itemDateLocal === todayLocal;
+    });
+
+    const logInconsistenciasToday = logInconsistencias.filter((item) => {
+        const date = new Date(item.Data_Processo);
+
+        // Data convertida para horário local
+        const itemDateLocal = date.toLocaleDateString("pt-BR")
+            .split("/")
+            .reverse()
+            .join("-");  // vira YYYY-MM-DD
+
+        const todayLocal = new Date()
+            .toLocaleDateString("pt-BR")
+            .split("/")
+            .reverse()
+            .join("-");
+
+        return itemDateLocal === todayLocal;
+    });
+
+    const parseInputDate = (value) => {
+        if (!value) return null;
+        const [year, month, day] = value.split("-").map(Number);
+        return new Date(year, month - 1, day);
+    };
+
+    const clampToRange = (date) => {
+        if (!date) return null;
+
+        const minBoundary = new Date(minRange);
+        minBoundary.setHours(0, 0, 0, 0);
+
+        const maxBoundary = new Date(today);
+        maxBoundary.setHours(23, 59, 59, 999);
+
+        if (date < minBoundary) return minBoundary;
+        if (date > maxBoundary) return maxBoundary;
+        return date;
+    };
+
+    const startDateFilter = clampToRange(parseInputDate(startDate));
+    const endDateFilter = clampToRange(parseInputDate(endDate));
+
+    const filteredLogs = logExec.filter((item) => {
+        const logDate = new Date(item.Data_Processo);
+        if (Number.isNaN(logDate.getTime())) return false;
+
+        const logDay = new Date(
+            logDate.getFullYear(),
+            logDate.getMonth(),
+            logDate.getDate()
+        );
+
+        const startBoundary = startDateFilter
+            ? new Date(startDateFilter)
+            : (() => {
+                const clone = new Date(minRange);
+                clone.setHours(0, 0, 0, 0);
+                return clone;
+            })();
+
+        const endBoundary = endDateFilter
+            ? new Date(endDateFilter)
+            : (() => {
+                const clone = new Date(today);
+                clone.setHours(23, 59, 59, 999);
+                return clone;
+            })();
+
+        if (logDay < startBoundary) return false;
+        if (logDay > endBoundary) return false;
+        return true;
+    });
+
     return (
         <div className="specificproject">
             {/* Header */}
             <div className="topo-specificproject">
-                <h1>{project === 'extfgtscxe' ? 'Solicitação FGTS' : 'Cálculo de Rescisões'}</h1>
+                <h1>{(project == 'EXCALCRESCISAO' ? "Cálculo de rescisões" : project == 'EXTFGTSCXE' ? "Solicitação FGTS" : null) ?? project}</h1>
                 <button 
                     onClick={() => {
-                        if (logExec.length > 0) {
-                        gerarExcel(logExec);
+                        if (logExecToday.length > 0) {
+                        gerarExcel(logExecToday);
                         }else {
                             alert('Nenhum resultado encontrado!')
                         }
@@ -65,12 +166,52 @@ function SpecificProject({ project }) {
             {/* Insights */}
             <div className="insights-specificproject">
                 <InsightCard title="Pendentes" value={listaInicial.length} />
-                <InsightCard title="Processados" value={logExec.length} />
+                <InsightCard title="Processados" value={logExecToday.length} />
                 <InsightCard
                     title="Inconsistências"
-                    value={logInconsistencias.length}
-                    highlight={logInconsistencias.length > 0}
+                    value={logInconsistenciasToday.length}
+                    highlight={logInconsistenciasToday.length > 0}
                 />
+            </div>
+
+            {/* GRÁFICO */}
+            <div className="ov-chart">
+                <div className="ov-chart-header">
+                    <div className="ov-chart-title">Total de Processamentos por dia</div>
+
+                    <div className="ov-chart-filters">
+                        <input
+                            type="date"
+                            className="date-input"
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                            min={minRangeISO}
+                            max={todayISO}
+                        />
+                        <input
+                            type="date"
+                            className="date-input"
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                            min={startDate || minRangeISO}
+                            max={todayISO}
+                        />
+                    </div>
+                </div>
+
+                <div className="chart-container">
+                    <div style={{ flex: 1 }}>
+                        <ChartStatus logs={filteredLogs}/>
+                    </div>
+
+                    <div style={{ flex: 3 }}>
+                        <ChartProcessing
+                            logs={filteredLogs}
+                            startDate={startDate}
+                            endDate={endDate}
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* Tabelas */}
@@ -78,8 +219,8 @@ function SpecificProject({ project }) {
                 <PendingTable listaInicial={listaInicial} />
             </SchedulerCard>
 
-            <SchedulerCard title="Processados hoje" qtd={logExec.length}>
-                <ProcessedTable logExec={logExec}/>
+            <SchedulerCard title="Processados hoje" qtd={logExecToday.length}>
+                <ProcessedTable logExec={logExecToday}/>
             </SchedulerCard>
         </div>
     );

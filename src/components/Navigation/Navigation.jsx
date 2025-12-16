@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
-import { FaIndustry, FaCode, FaCalendarAlt, FaSearch, FaRobot, FaHome } from "react-icons/fa";
+import { FaCalendarAlt, FaSearch, FaHome } from "react-icons/fa";
+import { VscRobot } from "react-icons/vsc";
+import { RiAdminFill } from "react-icons/ri";
 import "./Navigation.css";
 
 const ALL_TABS = [
-  { id: "landingpage", label: "Início", icon: FaHome },
-  { id: "excalcrescisao", label: "Cálculo de Rescisões", icon: FaRobot },
-  { id: "extfgtscxe", label: "Solicitação FGTS", icon: FaRobot },
-  { id: "production", label: "Produção", icon: FaIndustry },
-  { id: "development", label: "Desenvolvimento", icon: FaCode },
-  { id: "scheduler", label: "Scheduler", icon: FaCalendarAlt },
+  { id: "landingpage",    label: "Início", icon: FaHome },
+  { id: "projects",       label: "Projetos", icon: VscRobot },
+  { id: "scheduler",      label: "Agendamentos", icon: FaCalendarAlt },
+  { id: "management",     label: "Infraestrutura", icon: RiAdminFill },
 ];
 
 export default function Navigation({ activeTab, onTabChange, allowedTabs }) {

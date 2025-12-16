@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import "./Production.css";
 import RobotCard from "../../RobotCard/RobotCard";
-import AddProjectModal from "../../AddProjectModal/AddProjectModal"; // JS normal
 import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
+import AddProjectModal from "../../AddProjectModal/AddProjectModal";
 
-function Production() {
+function Production( {user, onTabChange} ) {
   const [robots, setRobots] = useState([]);
-  const [isAddOpen, setIsAddOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
@@ -58,9 +59,20 @@ function Production() {
 
   const robotsUnique = robots
     .filter((robot) => robot.Ambiente === "Prod")
+    .filter(robot => (
+      user.role !== 'Administrador' 
+        ? robot.Area_Responsavel === user.area_resp
+        : true
+    ))
     .filter(
       (robot, index, self) =>
         index === self.findIndex((r) => r.Nome === robot.Nome) // remove duplicados
+  );
+
+  const filteredRobots = robotsUnique.filter(robot =>
+    robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
+    robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
+    robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -68,15 +80,22 @@ function Production() {
       {isInfoOpen && <RobotInfoModal robot={robotInfo} onClose={() => setIsInfoOpen(false)}/>}
       {isAddOpen && <AddProjectModal onClose={() => setIsAddOpen(false)} ambiente="Prod"/>}
 
-      <div className="topo-tabs">
-        <h2>Robôs em Produção</h2>
-        <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+      <div className='search-tabs'>
+        <input 
+          type='text' 
+          placeholder='Pesquisar' 
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        {user.role == 'Administrador' && (
+            <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+        )}
       </div>
 
       <div className="production-cards" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-        {robotsUnique.length > 0 ? (
-          robotsUnique.map((robot) => (
-            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)}/>
+        {filteredRobots.length > 0 ? (
+          filteredRobots.map((robot) => (
+            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} user={user} onTabChange={onTabChange}/>
           ))
         ) : (
           <div className="empty-robots" style={{ textAlign: "center", width: "100%", padding: "48px 0" }}>

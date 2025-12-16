@@ -4,13 +4,20 @@ import { RiRobot3Fill } from "react-icons/ri";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useState } from "react";
 
-function Header({ user, onLoginClick }) {
+function Header({ user, onLoginClick, onLogout }) {
     const [open, setOpen] = useState(false);
     const [openProfile, setOpenProfile] = useState(false);
 
     const initials = user?.name
-    ? user.name.split(" ").map(n => n[0]).join("").toUpperCase()
-    : "?";
+        ? user.name.split(" ").map((n) => n[0]).join("").toUpperCase()
+        : "?";
+
+    const handleLogoutClick = () => {
+        if (onLogout) {
+            onLogout();
+        }
+        setOpenProfile(false);
+    };
 
     return (
         <header className="header">
@@ -21,7 +28,7 @@ function Header({ user, onLoginClick }) {
 
                 <div className="header-title">
                     <h1>Portal RPA GPS</h1>
-                    <p>GPS • RPA • Automação</p>
+                    <p>GPS • RPA • Automações</p>
                 </div>
             </div>
 
@@ -29,7 +36,10 @@ function Header({ user, onLoginClick }) {
             <nav className="desktop-nav">
                 <button className="nav-link">Projetos</button>
                 <button className="nav-link">Contato</button>
-                <button className="btn-primary">
+                <button
+                    className="btn-primary"
+                    onClick={user ? handleLogoutClick : onLoginClick}
+                >
                     {user ? "Sair" : "Entrar"}
                 </button>
 
@@ -56,7 +66,12 @@ function Header({ user, onLoginClick }) {
                 <nav className="mobile-nav">
                     <button className="mobile-link">Projetos</button>
                     <button className="mobile-link">Contato</button>
-                    <button className="mobile-primary">Entrar</button>
+                    <button
+                        className="mobile-primary"
+                        onClick={user ? handleLogoutClick : onLoginClick}
+                    >
+                        {user ? "Sair" : "Entrar"}
+                    </button>
                 </nav>
             )}
 
@@ -83,7 +98,7 @@ function Header({ user, onLoginClick }) {
                     </div>
                 </div>
 
-                <button className="btn-logout" onClick={() => alert("Sair...")}>
+                <button className="btn-logout" onClick={handleLogoutClick}>
                     Sair da conta
                 </button>
             </Modal>
