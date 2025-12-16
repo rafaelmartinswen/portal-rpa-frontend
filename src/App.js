@@ -5,39 +5,48 @@ function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!API_URL) {
+      console.error("REACT_APP_API_URL não definida no build");
+      alert("Erro de configuração da aplicação");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/login`,
+        `${API_URL}/auth/login`,
         { username, password }
       );
 
       console.log("Login OK:", response.data);
-
-      // devolve dados do usuário para o App.js
       onLogin(response.data);
 
     } catch (error) {
       console.error("Erro no login:", error);
-      alert("Usuário/senha inválidos");
+      alert("Usuário ou senha inválidos");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input 
+      <input
         type="text"
         placeholder="Usuário"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        autoComplete="username"
       />
-      <input 
+
+      <input
         type="password"
         placeholder="Senha"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        autoComplete="current-password"
       />
 
       <button type="submit">Entrar</button>
@@ -46,7 +55,3 @@ function Login({ onLogin }) {
 }
 
 export default Login;
-// Deploy test
-// Deploy test 2
-// Deploy test 3
-// Deploy 8
