@@ -4,12 +4,13 @@ import "./Login.css";
 function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
+  const [remember, setRemember] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/auth/login`, {
+      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })
@@ -22,11 +23,17 @@ function Login({ onLogin }) {
         return;
       }
 
-      // Login OK → envia dados para o App.js
-      onLogin({
+      // Backend retornou OK ƒÅ' chama o onLogin ja­ existente
+      const userData = {
         name: data.name,
         role: data.role,
-        email: data.email
+        email: data.email,
+        area_resp: data.area_resp
+      };
+
+      onLogin({
+        user: userData,
+        remember
       });
 
     } catch (err) {
@@ -40,25 +47,21 @@ function Login({ onLogin }) {
       <div className="extra-img-natal">
         <img src="/images/pngtree-christmas-removebg.png" alt="robot" />
       </div>
-
       <div className="top-login-container">
         <h2>GPS</h2>
       </div>
-
       <div className="body-login-container">
         <form className="login-card" onSubmit={handleSubmit}>
           <div className="top-login-card">
             <h2>Acesso ao Sistema</h2>
           </div>
-
           <label>Usuário</label>
           <input
             type="text"
             placeholder="Digite o seu Usuário"
             value={user}
-            onChange={(e) => setUser(e.target.value)}
+            onChange={(e) => setUser(e.target.value.toLowerCase())}
             required
-            autoComplete="username"
           />
           
           <label>Senha</label>
@@ -68,12 +71,15 @@ function Login({ onLogin }) {
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             required
-            autoComplete="current-password"
           />
 
           <div className="lembrar-me">
             <label>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(e) => setRemember(e.target.checked)}
+              />
               <span>Lembrar acesso</span>
             </label>
           </div>
@@ -84,7 +90,6 @@ function Login({ onLogin }) {
             <p>Não possui conta? Cadastre-se <span>aqui!</span></p>
           </div>
         </form>
-
         <img src="/images/robot_rpa.png" alt="robot" />
       </div>
     </div>

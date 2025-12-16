@@ -5,6 +5,8 @@ import Production from "../Tabs/Production/Production";
 import LandingPage from "../Tabs/LandingPage/LandingPage";
 import Development from "../Tabs/Development/Development";
 import Scheduler from "../Tabs/Scheduler/Scheduler";
+import Projects from "../Tabs/Projects/Projects";
+import Management from "../Tabs/Management/Management";
 import SpecificProject from "../Tabs/SpecificProject/SpecificProject";
 
 function DashboardHeader({ user }) {
@@ -17,9 +19,11 @@ function DashboardHeader({ user }) {
       "extfgtscxe",
       "production",
       "development",
-      "scheduler"
+      "scheduler",
+      "projects",
+      "management"
     ],
-    Usuario: ["landingpage","excalcrescisao", "extfgtscxe"] // Depois vamos alterar para apenas pessoas da area específica...
+    Usuario: ["landingpage","projects"] // Depois vamos alterar para apenas pessoas da area específica...
   };
 
   // Pegando o role e abas permitidas
@@ -37,13 +41,17 @@ function DashboardHeader({ user }) {
   const renderTabContent = () => {
     switch (activeTab) {
       case "landingpage":
-        return <LandingPage user={user}/>;
+        return <LandingPage user={user} onTabChange={setActiveTab}/>;
       case "production":
         return <Production />;
       case "development":
         return <Development />;
       case "scheduler":
         return <Scheduler />;
+      case "management":
+        return <Management />;
+      case "projects":
+        return <Projects user={user} onTabChange={setActiveTab}/>;
       default:
         return <SpecificProject project={activeTab} />;
     }
@@ -57,7 +65,7 @@ function DashboardHeader({ user }) {
         className="sidebar-toggle"
         onClick={() => setSidebarOpen((prev) => !prev)}
       >
-        ☰ Menu
+        ☰
       </button>
 
       {sidebarOpen && (
