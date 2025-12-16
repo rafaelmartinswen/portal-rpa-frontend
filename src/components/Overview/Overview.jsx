@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Overview.css";
 import ChartProcessing from "../Charts/ChartProcessing";
-import ChartStatus from "../Charts/ChartStatus";
 import { MdPlayArrow, MdRefresh, MdAddCircle } from "react-icons/md";
 
 function Overview() {
