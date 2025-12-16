@@ -9,7 +9,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })
@@ -22,7 +22,7 @@ function Login({ onLogin }) {
         return;
       }
 
-      // Backend retornou OK → chama o onLogin já existente
+      // Login OK → envia dados para o App.js
       onLogin({
         name: data.name,
         role: data.role,
@@ -40,14 +40,17 @@ function Login({ onLogin }) {
       <div className="extra-img-natal">
         <img src="/images/pngtree-christmas-removebg.png" alt="robot" />
       </div>
+
       <div className="top-login-container">
         <h2>GPS</h2>
       </div>
+
       <div className="body-login-container">
         <form className="login-card" onSubmit={handleSubmit}>
           <div className="top-login-card">
             <h2>Acesso ao Sistema</h2>
           </div>
+
           <label>Usuário</label>
           <input
             type="text"
@@ -55,6 +58,7 @@ function Login({ onLogin }) {
             value={user}
             onChange={(e) => setUser(e.target.value)}
             required
+            autoComplete="username"
           />
           
           <label>Senha</label>
@@ -64,6 +68,7 @@ function Login({ onLogin }) {
             value={pass}
             onChange={(e) => setPass(e.target.value)}
             required
+            autoComplete="current-password"
           />
 
           <div className="lembrar-me">
@@ -79,6 +84,7 @@ function Login({ onLogin }) {
             <p>Não possui conta? Cadastre-se <span>aqui!</span></p>
           </div>
         </form>
+
         <img src="/images/robot_rpa.png" alt="robot" />
       </div>
     </div>
