@@ -21,7 +21,7 @@ function AddProjectModal({ onClose, ambiente }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/robots", {
+      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

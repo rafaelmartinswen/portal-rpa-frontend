@@ -9,7 +9,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })

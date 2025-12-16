@@ -11,7 +11,7 @@ function Production() {
   const [robotInfo, setRobotInfo] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/robots")
+    fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
       .then((res) => res.json())
       .then((data) => setRobots(data))
       .catch((err) => console.error(err));
@@ -21,7 +21,7 @@ function Production() {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      const response = await fetch(`http://localhost:3001/robots/${id}`, {
+      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
         method: 'DELETE',
       });
 
@@ -46,7 +46,7 @@ function Production() {
   };
 
   const updateRobotsList = async () => {
-    const updatedResponse = await fetch("http://localhost:3001/robots");
+    const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
     const updatedData = await updatedResponse.json();
     setRobots(updatedData);
   }

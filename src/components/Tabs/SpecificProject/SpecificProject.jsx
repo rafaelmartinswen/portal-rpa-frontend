@@ -22,7 +22,7 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`http://localhost:3001/robots/lista-inicial/${project}`, setListaInicial);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/lista-inicial/${project}`, setListaInicial);
         };
 
         load();
@@ -35,8 +35,8 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`http://localhost:3001/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
-            fetchData(`http://localhost:3001/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
         };
 
         load();
@@ -48,7 +48,7 @@ function SpecificProject({ project }) {
         <div className="specificproject">
             {/* Header */}
             <div className="topo-specificproject">
-                <h1>{project == 'extfgtscxe' ? 'Solicitação FGTS' : 'Cálculo de Rescisões'}</h1>
+                <h1>{project === 'extfgtscxe' ? 'Solicitação FGTS' : 'Cálculo de Rescisões'}</h1>
                 <button 
                     onClick={() => {
                         if (logExec.length > 0) {

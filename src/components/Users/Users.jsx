@@ -21,7 +21,7 @@ function Users () {
     });
 
     const loadUsers = () => {
-        fetch("http://localhost:3001/users")
+        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users")
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error(err));
@@ -46,7 +46,7 @@ function Users () {
         e.preventDefault();
 
         try {
-        const response = await fetch("http://localhost:3001/users", {
+        const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -72,7 +72,7 @@ function Users () {
         try {
         console.log("Tentando deletar usuário:", id);
         
-        const response = await fetch(`http://localhost:3001/users/${id}`, {
+        const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users/${id}`, {
             method: 'DELETE',
         });
 

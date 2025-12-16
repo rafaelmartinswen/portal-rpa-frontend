@@ -11,7 +11,7 @@ function LandingPage({ user }) {
       }, []);
     
     const updateRobotsList = async () => {
-        const updatedResponse = await fetch("http://localhost:3001/robots");
+        const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
         const updatedData = await updatedResponse.json();
         setRobots(updatedData);
     }

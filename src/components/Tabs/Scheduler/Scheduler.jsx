@@ -30,7 +30,7 @@ function Scheduler() {
           </span>
         </label>
       </div>
-      {typeScheduler == "agenda" ? <SchedulerAgenda /> : days.map((day) => (
+      {typeScheduler === "agenda" ? <SchedulerAgenda /> : days.map((day) => (
         <SchedulerCard cod={day.cod} day={day.name}/>
       ))}
     </div>

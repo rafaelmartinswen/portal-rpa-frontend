@@ -13,7 +13,7 @@ function VirtualMachines() {
 
     async function fetchVMs() {
         try {
-        const response = await fetch("http://localhost:3001/azure/listar-vms", {
+        const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/listar-vms", {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -44,7 +44,7 @@ function VirtualMachines() {
 
     async function confirmAction() {
         try {
-            const response = await fetch("http://localhost:3001/azure/acao-vm", {
+            const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/acao-vm", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

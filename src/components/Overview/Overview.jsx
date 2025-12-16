@@ -22,7 +22,7 @@ function Overview() {
     useEffect(() => {
         async function fetchVMs() {
             try {
-            const response = await fetch("http://localhost:3001/azure/listar-vms", {
+            const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/listar-vms", {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
@@ -41,7 +41,7 @@ function Overview() {
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:3001/robots")
+        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
         .then((res) => res.json())
         .then((data) => setRobots(data))
         .catch((err) => console.error(err));

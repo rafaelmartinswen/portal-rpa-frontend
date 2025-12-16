@@ -9,7 +9,7 @@ function SchedulerInfoModal({ robot, onClose }) {
 
         const fetchData = async () => {
         try {
-            const response = await fetch(`http://localhost:3001/robots/lista-inicial/${robot.Sigla_DB}`);
+            const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/lista-inicial/${robot.Sigla_DB}`);
             const data = await response.json();
             setLista(data);
         } catch (err) {

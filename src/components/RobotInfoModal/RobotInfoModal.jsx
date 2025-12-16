@@ -78,16 +78,3 @@ function InfoField({ label, value }) {
     </div>
   );
 }
-
-function AttachmentRow({ type, link }) {
-  return (
-    <tr>
-      <td>{type}</td>
-      <td>
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          {link}
-        </a>
-      </td>
-    </tr>
-  );
-}
