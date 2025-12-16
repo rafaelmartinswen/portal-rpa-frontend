@@ -18,14 +18,10 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: |
-          cd client
-          npm install
+        run: npm install
 
       - name: Build React App
-        run: |
-          cd client
-          npm run build
+        run: npm run build
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
@@ -35,5 +31,5 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/client"
+          app_location: "/"
           output_location: "build"
