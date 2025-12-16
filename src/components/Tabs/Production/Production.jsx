@@ -87,7 +87,7 @@ function Production( {user, onTabChange} ) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        {user.role == 'Administrador' && (
+        {user.role === 'Administrador' && (
             <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
         )}
       </div>

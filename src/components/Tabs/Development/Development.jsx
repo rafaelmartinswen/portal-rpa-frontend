@@ -19,9 +19,7 @@ function Development( {user} ) {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
-        method: 'DELETE',
-      });
+      await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {method: 'DELETE',});
 
       // Recarrega a lista completa de robôs
       updateRobotsList()

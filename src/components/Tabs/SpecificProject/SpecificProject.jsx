@@ -149,7 +149,7 @@ function SpecificProject({ project }) {
         <div className="specificproject">
             {/* Header */}
             <div className="topo-specificproject">
-                <h1>{(project == 'EXCALCRESCISAO' ? "Cálculo de rescisões" : project == 'EXTFGTSCXE' ? "Solicitação FGTS" : null) ?? project}</h1>
+                <h1>{(project === 'EXCALCRESCISAO' ? "Cálculo de rescisões" : project === 'EXTFGTSCXE' ? "Solicitação FGTS" : null) ?? project}</h1>
                 <button 
                     onClick={() => {
                         if (logExecToday.length > 0) {

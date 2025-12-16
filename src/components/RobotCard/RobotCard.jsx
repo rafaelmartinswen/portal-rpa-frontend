@@ -36,7 +36,7 @@ function RobotCard({ robot, onDelete, openInfo, user, onTabChange }) {
       </div>
 
       <div className="robot-card-actions">
-        {robot.Ambiente != 'Dev' && (
+        {robot.Ambiente !== 'Dev' && (
           <button className="btn-left" onClick={() => onTabChange(robot.Sigla_DB)}>Processamento</button>
         )}
         {user.role === "Administrador" && (
