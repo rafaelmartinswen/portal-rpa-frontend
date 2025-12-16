@@ -78,10 +78,29 @@
 /* ACTION BUTTON */
 .robot-card-actions {
   margin-top: 15px;
+  display: flex;
+  justify-content: space-between; /* separa os botões */
+  gap: 10px; /* espaçamento entre eles */
 }
 
-.robot-card-actions button {
-  width: 100%;
+.btn-left {
+  flex: 1;
+  background: #e5e7eb;
+  color: #374151;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-left:hover {
+  background: #d1d5db;
+}
+
+.btn-delete {
+  flex: 1;
   background: #fee2e2;
   color: #b91c1c;
   padding: 0.5rem;
@@ -92,9 +111,10 @@
   transition: 0.2s;
 }
 
-.robot-card-actions button:hover {
+.btn-delete:hover {
   background: #fecaca;
 }
+
 
 /* RESPONSIVO */
 @media (max-width: 768px) {
