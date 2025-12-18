@@ -84,8 +84,6 @@ function Users () {
             throw new Error('Erro ao deletar usuário');
         }
 
-        const result = await response.json();
-
         // Recarrega a lista completa de usuários
         setOpenActionUser(false);
         loadUsers();
