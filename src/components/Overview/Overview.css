@@ -19,6 +19,12 @@
     color: #b86100;
 }
 
+.ov-alert-warning-red {
+    background: #ffe5e5;
+    border-left: 4px solid #ff0000;
+    color: #b80000;
+}
+
 .logBox {
   background: #222;
   padding: 15px;
