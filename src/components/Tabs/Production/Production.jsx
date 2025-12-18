@@ -92,7 +92,7 @@ function Production( {user, onTabChange} ) {
         )}
       </div>
 
-      <div className="production-cards" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+      <div className="robot-cards-container">
         {filteredRobots.length > 0 ? (
           filteredRobots.map((robot) => (
             <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} user={user} onTabChange={onTabChange}/>

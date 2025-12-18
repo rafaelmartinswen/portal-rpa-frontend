@@ -5,15 +5,31 @@ import { FiPlayCircle, FiClock, FiActivity } from "react-icons/fi";
 
 function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
+    const [alerts, setAlerts] = useState([]);
 
     useEffect(() => {
         updateRobotsList();
+        updateAlerts();
       }, []);
-    
+
     const updateRobotsList = async () => {
-        const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
-        const updatedData = await updatedResponse.json();
-        setRobots(updatedData);
+        try {
+            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+            const data = await res.json();
+            setRobots(data);
+        } catch (error) {
+            console.error("Erro ao buscar robôs:", error);
+        }
+    };
+
+    const updateAlerts = async () => {
+        try {
+            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/alertsRobots");
+            const data = await res.json();
+            setAlerts(data);
+        } catch (error) {
+            console.error("Erro ao buscar alertas:", error);
+        }
     }
 
     const robotsList = robots
@@ -56,7 +72,7 @@ function LandingPage({ user, onTabChange }) {
                 <div
                     className="card"
                     onClick={() => {
-                        if (user.role === "Administrador") {
+                        if (user?.role === "Administrador") {
                             onTabChange("scheduler");
                         } else {
                             alert("Acesso permitido apenas para administradores.");
@@ -70,7 +86,28 @@ function LandingPage({ user, onTabChange }) {
                     <p>Controle horários e frequências de execução.</p>
                 </div>
 
+                <div className="card">
+                    <div className="icon-area red">
+                        <IoAlertSharp />
+                    </div>
+                    <h3>Oportunidades</h3>
+                    <p>Verifique o log de oportunidades</p>
+                </div>
             </div>
+
+            {/* Alertas de projetos */}
+            <div className="section-title">
+                <h3>Alertas de Execução</h3>
+            </div>
+            {alerts.length > 0 &&
+                alerts.map((alert) =>
+                    alert.Tipo_Alerta === 'stopped' ? (
+                    <OvAlertStopped key={alert.id} alert={alert} />
+                    ) : (
+                    <OvAlertFailed key={alert.id} alert={alert} />
+                    )
+                )
+            }
 
             {/* Últimas atividades */}
             <div className="section-title">
@@ -140,6 +177,22 @@ function formatExecution(ultimaExec) {
         dayLabel,               // "hoje", "ontem", "03/12/2025"
         timeLabel: `${hours}:${minutes}`, // "22:03"
     };
+}
+
+function OvAlertFailed({ alert }) {
+    return (
+        <div className="ov-alert ov-alert-warning" style={{ fontWeight: 500, fontSize: '14px' }}>
+            ⚠️ Projeto {alert.Projeto} falhou durante a execução!
+        </div>
+    );
+}
+
+function OvAlertStopped({ alert }) {
+    return (
+        <div className="ov-alert ov-alert-warning-red" style={{ fontWeight: 500, fontSize: '14px' }}>
+            ❗ Projeto {alert.Projeto} parou!
+        </div>
+    );
 }
 
 export default LandingPage;

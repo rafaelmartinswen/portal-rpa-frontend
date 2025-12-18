@@ -1,6 +1,14 @@
+.robot-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
 /* CARD BASE */
 .robot-card {
-  width: 45%;
+  flex: 0 0 calc(50% - 0.75rem);
+  box-sizing: border-box;
+  /* width: 45%; */
   background: #fff;
   border: 1px solid #e5e7eb;
   border-top: 10px solid #2D3E50;
@@ -9,7 +17,7 @@
   padding: 20px;
   margin-top: 1.5rem;
   transition: transform 0.2s ease;
-  cursor: pointer;
+  cursor: default;
 }
 
 .robot-card:hover {
@@ -119,6 +127,6 @@
 /* RESPONSIVO */
 @media (max-width: 768px) {
   .robot-card {
-    width: 100%;
+    flex: 0 0 100%;
   }
 }

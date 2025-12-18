@@ -31,16 +31,21 @@
 ========================= */
 
 .quick-cards {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    /* gap: 1.25rem; */
     margin-bottom: 40px;
 }
 
 .card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    align-items: center;
     background: #1E2A36;
-    padding: 24px;
-    width: 260px;
+    padding: 12px;
+    width: 80%;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.06);
     transition: 0.25s ease;
@@ -53,16 +58,23 @@
 }
 
 .card h3 {
-    margin-top: 16px;
+    font-size: 1.05rem;
+    margin: 0 0 6px;
     color: #f1f5f9;
 }
 
 .card p {
+    margin: 0;
     font-size: 0.85rem;
     color: #94a3b8;
 }
 
 /* Icon Containers */
+.card .icon-area {
+    grid-row: 1 / span 2;
+    align-self: center;
+}
+
 .icon-area {
     width: 48px;
     height: 48px;
@@ -76,6 +88,7 @@
 .icon-area.blue { background: #1e40af; color: #93c5fd; }
 .icon-area.green { background: #065f46; color: #a7f3d0; }
 .icon-area.yellow { background: #854d0e; color: #fcd34d; }
+.icon-area.red { background: #85100e; color: #fc4d4d; }
 
 /* =========================
    Activities
@@ -118,8 +131,26 @@
 }
 
 /* Responsividade */
+@media (max-width: 1100px) {
+    .quick-cards {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+    .card {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
-  .card {
-    width: 100%;
-  }
+    .quick-cards {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+    }
+    .card {
+        width: 100%;
+    }
 }

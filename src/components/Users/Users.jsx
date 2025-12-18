@@ -11,14 +11,15 @@ function Users () {
     const [openActionUser, setOpenActionUser] = useState(false);
     const [selectedUser, setSelectedUser] = useState([]);
     const [selectedAction, setSelectedAction] = useState(null);
-    const [form, setForm] = useState({
+    const initialFormState = {
         Nome: "",
         Username: "",
         Email: "",
-        Senha: "123456",
+        Senha: "",
         tipoUsuario: "",
-        AreaResponsavel: ""
-    });
+        AreaResponsavel: "Usu"
+    };
+    const [form, setForm] = useState(initialFormState);
 
     const loadUsers = () => {
         fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users")
@@ -59,12 +60,13 @@ function Users () {
         }
 
         alert("Usuário adicionado com sucesso!");
+        setForm(initialFormState);
         setOpenAddModal(false);
         loadUsers(); // recarrega a lista
 
         } catch (err) {
         console.error(err);
-        alert("Erro ao salvar.");
+        alert("Erro ao salvar usuário!");
         }
     };
 
@@ -75,8 +77,6 @@ function Users () {
         const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users/${id}`, {
             method: 'DELETE',
         });
-
-        console.log("Status da resposta:", response.status);
         
         if (!response.ok) {
             const errorText = await response.text();
@@ -85,7 +85,6 @@ function Users () {
         }
 
         const result = await response.json();
-        console.log("Sucesso:", result);
 
         // Recarrega a lista completa de usuários
         setOpenActionUser(false);
@@ -116,8 +115,8 @@ function Users () {
                 {filteredUsers.map((user) => (
                     <div className="VM-card" key={user.Nome}>
                         {/* STATUS NO CANTO SUPERIOR DIREITO */}
-                        <button className={`user-area ${user.Area_resp ?? user.RoleType}`}>
-                            {user.Area_resp ?? user.RoleType}
+                        <button className={`user-area ${user.RoleType !== 'Administrador' ? user.Area_resp : user.RoleType}`}>
+                            {user.RoleType !== 'Administrador' ? user.Area_resp : user.RoleType}
                         </button>
 
                         <div className="vm-icon"><FaCircleUser className='vm-icon-img'/></div>
@@ -183,17 +182,19 @@ function Users () {
                     <div className="form-group">
                         <label>Senha</label>
                         <input
-                        type="text"
+                        type="password"
                         name="Senha"
-                        value="123456"
+                        value={form.Senha}
                         onChange={handleChange}
-                        disabled
+                        placeholder="***********"
+                        required={true}
                         />
                     </div>
 
                     <div className="form-group">
                         <label>Tipo de usuário</label>
-                        <select name="tipoUsuario" value={form.tipoUsuario} onChange={handleChange}>
+                        <select name="tipoUsuario" value={form.tipoUsuario} onChange={handleChange} required={true}>
+                            <option value="">Selecione...</option>
                             <option value="Administrador">Administrador</option>
                             <option value="Usuario">Usuário</option>
                         </select>
@@ -201,7 +202,7 @@ function Users () {
 
                     <div className="form-group">
                         <label>Área responsável</label>
-                        <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required={true}>
+                        <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required={form.tipoUsuario === 'Usuario'}>
                             <option value="">Selecione...</option>
                             <option value="Financeiro">Financeiro</option>
                             <option value="Fiscal">Fiscal</option>
