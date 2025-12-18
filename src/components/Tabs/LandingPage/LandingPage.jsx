@@ -2,6 +2,7 @@ import './LandingPage.css';
 import { useEffect, useState } from "react";
 import { RiRobot3Fill } from "react-icons/ri";
 import { FiPlayCircle, FiClock, FiActivity } from "react-icons/fi";
+import { IoAlertSharp } from "react-icons/io5";
 
 function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
