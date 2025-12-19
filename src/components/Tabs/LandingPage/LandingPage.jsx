@@ -1,12 +1,15 @@
 import './LandingPage.css';
+import Modal from "../../Modal/Modal";
 import { useEffect, useState } from "react";
 import { RiRobot3Fill } from "react-icons/ri";
-import { FiPlayCircle, FiClock, FiActivity } from "react-icons/fi";
+import { FiPlayCircle, FiClock, FiActivity, FiAlertCircle } from "react-icons/fi";
 import { IoAlertSharp } from "react-icons/io5";
 
 function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
     const [alerts, setAlerts] = useState([]);
+    const [openAlert, setOpenAlert] = useState(false);
+    const [selectedPage, setSelectedPage] = useState(null);
 
     useEffect(() => {
         updateRobotsList();
@@ -31,6 +34,11 @@ function LandingPage({ user, onTabChange }) {
         } catch (error) {
             console.error("Erro ao buscar alertas:", error);
         }
+    }
+
+    function handleAction(page) {
+        setSelectedPage(page);
+        setOpenAlert(true);
     }
 
     const robotsList = robots
@@ -62,7 +70,7 @@ function LandingPage({ user, onTabChange }) {
                     <p>Gerencie e monitore todos os robôs configurados.</p>
                 </div>
                 
-                <div className="card">
+                <div className="card" onClick={() => handleAction("Executar robô")}>
                     <div className="icon-area green">
                         <FiPlayCircle />
                     </div>
@@ -87,7 +95,7 @@ function LandingPage({ user, onTabChange }) {
                     <p>Controle horários e frequências de execução.</p>
                 </div>
 
-                <div className="card">
+                <div className="card" onClick={() => handleAction("Oportunidades")}>
                     <div className="icon-area red">
                         <IoAlertSharp />
                     </div>
@@ -139,6 +147,22 @@ function LandingPage({ user, onTabChange }) {
                 }) : null}
             </div>
 
+            <Modal open={openAlert} onClose={() => setOpenAlert(false)}>
+                <div className="confirmacao-container">
+                    <div className="confirmacao-icon">
+                        <FiAlertCircle size={50} />
+                    </div>
+
+                    <h2>Alerta</h2>
+                    <p>
+                        A página <strong>{selectedPage}</strong> está em desenvolvimento...
+                    </p>
+
+                    <div className="confirmacao-buttons">
+                        <button className="btn-nao" onClick={() => setOpenAlert(false)}>Voltar</button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 }

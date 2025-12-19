@@ -3,6 +3,8 @@ import "./Production.css";
 import RobotCard from "../../RobotCard/RobotCard";
 import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
 import AddProjectModal from "../../AddProjectModal/AddProjectModal";
+import Modal from "../../Modal/Modal";
+import { FiAlertCircle } from "react-icons/fi";
 
 function Production( {user, onTabChange} ) {
   const [robots, setRobots] = useState([]);
@@ -10,6 +12,8 @@ function Production( {user, onTabChange} ) {
   const [robotInfo, setRobotInfo] = useState([]);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [openAlert, setOpenAlert] = useState(false);
+  const [selectedPage, setSelectedPage] = useState(null);
 
   useEffect(() => {
     fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
@@ -57,6 +61,11 @@ function Production( {user, onTabChange} ) {
     setRobotInfo(robot);
   }
 
+  function handleAction(page) {
+    setSelectedPage(page);
+    setOpenAlert(true);
+  }
+
   const robotsUnique = robots
     .filter((robot) => robot.Ambiente === "Prod")
     .filter(robot => (
@@ -95,7 +104,15 @@ function Production( {user, onTabChange} ) {
       <div className="robot-cards-container">
         {filteredRobots.length > 0 ? (
           filteredRobots.map((robot) => (
-            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} user={user} onTabChange={onTabChange}/>
+            <RobotCard 
+              key={robot.Id} 
+              robot={robot} 
+              onDelete={deleteRobot} 
+              openInfo={() => openInfoRobot(robot)} 
+              user={user} 
+              onTabChange={onTabChange} 
+              handleAction={() => handleAction(robot.Nome)}
+            />
           ))
         ) : (
           <div className="empty-robots" style={{ textAlign: "center", width: "100%", padding: "48px 0" }}>
@@ -107,6 +124,23 @@ function Production( {user, onTabChange} ) {
           </div>
         )}
       </div>
+
+      <Modal open={openAlert} onClose={() => setOpenAlert(false)}>
+        <div className="confirmacao-container">
+            <div className="confirmacao-icon">
+                <FiAlertCircle size={50} />
+            </div>
+
+            <h2>Alerta</h2>
+            <p>
+                A página <strong>{selectedPage}</strong> está em desenvolvimento...
+            </p>
+
+            <div className="confirmacao-buttons">
+                <button className="btn-nao" onClick={() => setOpenAlert(false)}>Voltar</button>
+            </div>
+        </div>
+      </Modal>
     </div>
   );
 }

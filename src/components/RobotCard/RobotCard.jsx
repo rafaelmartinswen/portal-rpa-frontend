@@ -1,6 +1,6 @@
 import "./RobotCard.css";
 
-function RobotCard({ robot, onDelete, openInfo, user, onTabChange }) {
+function RobotCard({ robot, onDelete, openInfo, user, onTabChange, handleAction }) {
   const {
     Id,
     Nome,
@@ -13,6 +13,19 @@ function RobotCard({ robot, onDelete, openInfo, user, onTabChange }) {
 
   const ultimaExecucao =
     Ultima_Exec ? new Date(Ultima_Exec).toLocaleDateString("pt-BR") : "—";
+  
+  const robotsWithPage = [
+    "EXCALCRESCISAO",
+    "EXTFGTSCXE"
+  ];
+  
+  function handleTabChange() {
+    if (robotsWithPage.includes(Sigla_DB)) {
+      onTabChange(robot.Sigla_DB)
+    } else {
+      handleAction(Nome);
+    }
+  }
 
   return (
     <div className="robot-card">
@@ -37,7 +50,7 @@ function RobotCard({ robot, onDelete, openInfo, user, onTabChange }) {
 
       <div className="robot-card-actions">
         {robot.Ambiente !== 'Dev' && (
-          <button className="btn-left" onClick={() => onTabChange(robot.Sigla_DB)}>Processamento</button>
+          <button className="btn-left" onClick={handleTabChange}>Processamento</button>
         )}
         {user.role === "Administrador" && (
           <button className="btn-delete" onClick={() => onDelete(Id)}>Excluir</button>
