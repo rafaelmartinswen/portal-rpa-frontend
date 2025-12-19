@@ -61,8 +61,7 @@ function LandingPage({ user, onTabChange }) {
 
             {/* Cards principais */}
             <div className="quick-cards">
-
-                <div className="card" onClick={() => onTabChange("projects")}>
+                <div className="card" onClick={() => onTabChange("production")}>
                     <div className="icon-area blue">
                         <RiRobot3Fill />
                     </div>

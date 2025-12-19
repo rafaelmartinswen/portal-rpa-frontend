@@ -1,11 +1,9 @@
 import { useState } from "react";
 import Navigation from "../Navigation/Navigation";
-
 import Production from "../Tabs/Production/Production";
 import LandingPage from "../Tabs/LandingPage/LandingPage";
 import Development from "../Tabs/Development/Development";
 import Scheduler from "../Tabs/Scheduler/Scheduler";
-import Projects from "../Tabs/Projects/Projects";
 import Management from "../Tabs/Management/Management";
 import SpecificProject from "../Tabs/SpecificProject/SpecificProject";
 
@@ -43,15 +41,13 @@ function DashboardHeader({ user }) {
       case "landingpage":
         return <LandingPage user={user} onTabChange={setActiveTab}/>;
       case "production":
-        return <Production />;
+        return <Production user={user} onTabChange={setActiveTab}/>;
       case "development":
-        return <Development />;
+        return <Development user={user} onTabChange={setActiveTab}/>;
       case "scheduler":
         return <Scheduler />;
       case "management":
         return <Management />;
-      case "projects":
-        return <Projects user={user} onTabChange={setActiveTab}/>;
       default:
         return <SpecificProject project={activeTab} />;
     }
@@ -83,6 +79,7 @@ function DashboardHeader({ user }) {
             setSidebarOpen(false);
           }}
           allowedTabs={allowedTabs}
+          user={user}
         />
       </aside>
 

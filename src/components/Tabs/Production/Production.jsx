@@ -88,6 +88,27 @@ function Production( {user, onTabChange} ) {
     <div className="production">
       {isInfoOpen && <RobotInfoModal robot={robotInfo} onClose={() => setIsInfoOpen(false)}/>}
       {isAddOpen && <AddProjectModal onClose={() => setIsAddOpen(false)} ambiente="Prod"/>}
+      
+      <div className="top-management">
+        <div className="text-content">
+          <h3>Projetos em produção</h3>
+          <h2>Listagem de projetos ativos</h2>
+        </div>
+        <div className="feature-cards">
+          <div className="top-management-card">
+            <h4 style={{fontSize: "14px", textAlign: "center"}}>Agendamentos</h4>
+            <button>Verificar</button>
+          </div>
+          <div className="top-management-card">
+            <h4 style={{fontSize: "14px", textAlign: "center"}}>Histórico de execuções</h4>
+            <button>Verificar</button>
+          </div>
+          <div className="top-management-card">
+            <h4 style={{fontSize: "14px", textAlign: "center"}}>Quantidade de projetos</h4>
+            <p style={{textAlign: "center"}}>{robotsUnique.length}</p>
+          </div>
+        </div>
+      </div>
 
       <div className='search-tabs'>
         <input 

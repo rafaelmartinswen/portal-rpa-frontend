@@ -24,18 +24,27 @@ function Management() {
 
         <div className="feature-cards">
           <div className="top-management-card">
-            <h4>Ligar/Desligar VM</h4>
-            <p>Gerencie o status das máquinas virtuais.</p>
+            <h4>Ligar e Desligar Máquinas Virtuais</h4>
+            <p>
+              Controle o status das máquinas virtuais, iniciando ou interrompendo
+              recursos conforme a necessidade.
+            </p>
           </div>
 
           <div className="top-management-card">
-            <h4>Gerenciar Usuários e Recursos</h4>
-            <p>Controle usuários e recursos essenciais do ambiente.</p>
+            <h4>Gerenciamento de Usuários e Recursos</h4>
+            <p>
+              Administre usuários, permissões e recursos essenciais do ambiente
+              de forma centralizada.
+            </p>
           </div>
 
           <div className="top-management-card">
-            <h4>Logs & Auditoria</h4>
-            <p>Acesse informações detalhadas de execução.</p>
+            <h4>Logs e Auditoria</h4>
+            <p>
+              Acompanhe registros detalhados de execução e auditoria para maior
+              controle e rastreabilidade.
+            </p>
           </div>
         </div>
       </div>
