@@ -41,8 +41,15 @@ function LandingPage({ user, onTabChange }) {
         setOpenAlert(true);
     }
 
+    const filteredAlerts = alerts .filter(alert => ( user.role !== 'Administrador' ? alert.Area_Responsavel === user.area_resp : true ))
+
     const robotsList = robots
         .filter(robot => robot.Ambiente === "Prod")
+        .filter(robot => (
+        user.role !== 'Administrador' 
+            ? robot.Area_Responsavel === user.area_resp
+            : true
+        ))
         .filter((robot, index, self) =>
             index === self.findIndex(r => r.Nome === robot.Nome)
         )
@@ -68,14 +75,6 @@ function LandingPage({ user, onTabChange }) {
                     <h3>Robôs Ativos</h3>
                     <p>Gerencie e monitore todos os robôs configurados.</p>
                 </div>
-                
-                <div className="card" onClick={() => handleAction("Executar robô")}>
-                    <div className="icon-area green">
-                        <FiPlayCircle />
-                    </div>
-                    <h3>Executar Robô</h3>
-                    <p>Inicie execuções sob demanda com segurança.</p>
-                </div>
 
                 <div
                     className="card"
@@ -83,7 +82,7 @@ function LandingPage({ user, onTabChange }) {
                         if (user?.role === "Administrador") {
                             onTabChange("scheduler");
                         } else {
-                            alert("Acesso permitido apenas para administradores.");
+                            handleAction("Agendamentos")
                         }
                     }}
                 >
@@ -93,29 +92,44 @@ function LandingPage({ user, onTabChange }) {
                     <h3>Agendamentos</h3>
                     <p>Controle horários e frequências de execução.</p>
                 </div>
+                
+                {user.role === 'Administrador' && (
+                    <>
+                        <div className="card" onClick={() => handleAction("Executar robô")}>
+                            <div className="icon-area green">
+                                <FiPlayCircle />
+                            </div>
+                            <h3>Executar Robô</h3>
+                            <p>Inicie execuções sob demanda com segurança.</p>
+                        </div>
 
-                <div className="card" onClick={() => handleAction("Oportunidades")}>
-                    <div className="icon-area red">
-                        <IoAlertSharp />
-                    </div>
-                    <h3>Oportunidades</h3>
-                    <p>Verifique o log de oportunidades</p>
-                </div>
+                        <div className="card" onClick={() => handleAction("Oportunidades")}>
+                            <div className="icon-area red">
+                                <IoAlertSharp />
+                            </div>
+                            <h3>Oportunidades</h3>
+                            <p>Verifique o log de oportunidades</p>
+                        </div>
+                    </>
+                )}
             </div>
 
             {/* Alertas de projetos */}
             <div className="section-title">
                 <h3>Alertas de Execução</h3>
             </div>
-            {alerts.length > 0 &&
-                alerts.map((alert) =>
-                    alert.Tipo_Alerta === 'stopped' ? (
-                    <OvAlertStopped key={alert.id} alert={alert} />
-                    ) : (
-                    <OvAlertFailed key={alert.id} alert={alert} />
-                    )
-                )
-            }
+            {filteredAlerts.length > 0 ?
+                filteredAlerts.map((alert) => (
+                    <div key={alert.Id}>
+                        {alert.Tipo_Alerta === 'stopped' ? (
+                            <OvAlertStopped alert={alert} />
+                        ) : (
+                            <OvAlertFailed alert={alert} />
+                        )}
+                    </div>
+                )) : <div className="ov-alert ov-alert-warning-green" style={{ fontWeight: 500, fontSize: '14px' }}>
+                    ✔ Nenhum projeto em estado de alerta!
+                </div>}
 
             {/* Últimas atividades */}
             <div className="section-title">
@@ -127,7 +141,7 @@ function LandingPage({ user, onTabChange }) {
                     const { dayLabel, timeLabel } = formatExecution(robot.Ultima_Exec);
 
                     return (
-                        <div key={robot.Nome} className="activity-item">
+                        <div key={robot.Id} className="activity-item">
                             <FiActivity className="activity-icon" />
                             <div>
                                 <strong>Robô - {robot.Nome}</strong>
