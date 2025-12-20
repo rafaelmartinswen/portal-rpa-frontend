@@ -11,7 +11,7 @@ function ProjectManagement() {
     
     const updateRobotsList = async () => {
         try {
-            const res = await fetch("http://localhost:3001/robots");
+            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
             const data = await res.json();
             setRobots(data);
         } catch (error) {
