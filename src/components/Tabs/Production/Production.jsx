@@ -97,11 +97,11 @@ function Production( {user, onTabChange} ) {
         <div className="feature-cards">
           <div className="top-management-card">
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Agendamentos</h4>
-            <button>Verificar</button>
+            <button>Acessar</button>
           </div>
           <div className="top-management-card">
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Histórico de execuções</h4>
-            <button>Verificar</button>
+            <button>Acessar</button>
           </div>
           <div className="top-management-card">
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Quantidade de projetos</h4>
