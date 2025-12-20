@@ -1,0 +1,50 @@
+.projectmanagement {
+    width: 100%;
+    /* height: 100dvh; */
+    margin: 0 auto;
+    align-items: center;
+}
+
+.large-management-card {
+    flex: 0 0 calc(33.333% - 20px); /* 3 por linha */
+    max-width: calc(33.333% - 20px);
+    box-sizing: border-box;
+
+    padding: 15px;
+    background: #f6f6f6;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform .2s ease;
+}
+
+.large-management-card:hover {
+    transform: translateY(-4px);
+}
+
+.large-management-card h4 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: #273544;
+}
+
+.large-management-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* 📱 Tablet – 2 por linha */
+@media (max-width: 991px) {
+    .large-management-card {
+        flex: 0 0 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* 📱 Mobile – 1 por linha */
+@media (max-width: 600px) {
+    .large-management-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

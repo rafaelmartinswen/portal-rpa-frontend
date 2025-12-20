@@ -95,15 +95,15 @@ function Production( {user, onTabChange} ) {
           <h2>Listagem de projetos ativos</h2>
         </div>
         <div className="feature-cards">
-          <div className="top-management-card">
+          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Agendamentos</h4>
             <button>Acessar</button>
           </div>
-          <div className="top-management-card">
+          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Histórico de execuções</h4>
             <button>Acessar</button>
           </div>
-          <div className="top-management-card">
+          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
             <h4 style={{fontSize: "14px", textAlign: "center"}}>Quantidade de projetos</h4>
             <p style={{textAlign: "center"}}>{robotsUnique.length}</p>
           </div>

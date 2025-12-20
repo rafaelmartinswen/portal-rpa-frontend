@@ -26,7 +26,7 @@ const ALL_TABS = [
         icon: RiRobot3Line,
       },
       {
-        id: "projectsManagement",
+        id: "projectManagement",
         label: "Gestão",
         icon: DiAptana,
       },
