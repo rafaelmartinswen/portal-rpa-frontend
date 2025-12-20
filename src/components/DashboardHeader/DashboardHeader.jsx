@@ -48,6 +48,8 @@ function DashboardHeader({ user }) {
         return <Scheduler />;
       case "management":
         return <Management />;
+      case "projectManagement":
+        return <ProjectManagement />;
       default:
         return <SpecificProject project={activeTab} />;
     }
