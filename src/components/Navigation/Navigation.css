@@ -138,12 +138,19 @@ h2 {
 /* LAYOUT GERAL */
 .layout-container {
   display: flex;
-  min-height: 92vh;
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* SIDEBAR DESKTOP */
 .sidebar {
   width: 220px;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  bottom: 0;
   background-color: #1E2A36;
   border-right: 1px solid #ff8d66;
   padding: 4px;
@@ -155,6 +162,10 @@ h2 {
   flex: 1;
   padding: 20px;
   background: #fafafa;
+  margin-left: 220px;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
 
 }
 
@@ -263,7 +274,8 @@ h2 {
   /* Layout em coluna só pra organizar, mas sidebar será fixa */
   .layout-container {
     display: block;
-    min-height: 100vh;
+    min-height: 0;
+    height: 100%;
     position: relative;
   }
 
@@ -282,7 +294,7 @@ h2 {
   /* Sidebar vira painel lateral escondido */
   .sidebar {
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 0;
     bottom: 0;
 
@@ -309,6 +321,9 @@ h2 {
     width: 100%;
     padding: 16px;
     box-sizing: border-box;
+    margin-left: 0;
+    height: 100%;
+    overflow-y: auto;
   }
 
   /* Evita scroll lateral */
