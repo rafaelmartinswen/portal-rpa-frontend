@@ -5,6 +5,7 @@ import LandingPage from "../Tabs/LandingPage/LandingPage";
 import Development from "../Tabs/Development/Development";
 import Scheduler from "../Tabs/Scheduler/Scheduler";
 import Management from "../Tabs/Management/Management";
+import ProjectManagement from "../Tabs/ProjectManagement/ProjectManagement";
 import SpecificProject from "../Tabs/SpecificProject/SpecificProject";
 
 function DashboardHeader({ user }) {
