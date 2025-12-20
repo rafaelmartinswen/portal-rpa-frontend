@@ -41,7 +41,7 @@ function LandingPage({ user, onTabChange }) {
         setOpenAlert(true);
     }
 
-    const filteredAlerts = alerts .filter(alert => ( user.role !== 'Administrador' ? alert.Area_Responsavel === user.area_resp : true ))
+    const filteredAlerts = alerts.filter(alert => ( user.role !== 'Administrador' ? alert.Area_Responsavel === user.area_resp : true ))
 
     const robotsList = robots
         .filter(robot => robot.Ambiente === "Prod")
