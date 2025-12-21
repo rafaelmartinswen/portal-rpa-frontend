@@ -66,7 +66,7 @@ function Users () {
 
         } catch (err) {
         console.error(err);
-        alert("Erro ao salvar usuário!");
+        alert("Erro ao salvar.");
         }
     };
 
@@ -77,12 +77,17 @@ function Users () {
         const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users/${id}`, {
             method: 'DELETE',
         });
+
+        console.log("Status da resposta:", response.status);
         
         if (!response.ok) {
             const errorText = await response.text();
             console.log("Erro da API:", errorText);
             throw new Error('Erro ao deletar usuário');
         }
+
+        const result = await response.json();
+        console.log("Sucesso:", result);
 
         // Recarrega a lista completa de usuários
         setOpenActionUser(false);
@@ -141,75 +146,77 @@ function Users () {
                 <h2>Adicionar Usuário</h2>
 
                 <form onSubmit={handleSave}>
-                    <div className="form-group">
-                        <label>Nome</label>
-                        <input
-                        type="text"
-                        name="Nome"
-                        value={form.Nome}
-                        onChange={handleChange}
-                        placeholder="Digite o nome"
-                        required={true}
-                        />
-                    </div>
+                    <div className="form-grid">
+                        <div className="form-group half">
+                            <label>Nome</label>
+                            <input
+                            type="text"
+                            name="Nome"
+                            value={form.Nome}
+                            onChange={handleChange}
+                            placeholder="Digite o nome"
+                            required={true}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Username</label>
-                        <input
-                        type="text"
-                        name="Username"
-                        value={form.Username}
-                        onChange={handleChange}
-                        placeholder="Digite o nome de usuário"
-                        required={true}
-                        />
-                    </div>
+                        <div className="form-group half">
+                            <label>Username</label>
+                            <input
+                            type="text"
+                            name="Username"
+                            value={form.Username}
+                            onChange={handleChange}
+                            placeholder="Digite o nome de usuário"
+                            required={true}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>E-mail</label>
-                        <input
-                        type="text"
-                        name="Email"
-                        value={form.Email}
-                        onChange={handleChange}
-                        placeholder="Digite o e-mail"
-                        required={true}
-                        />
-                    </div>
+                        <div className="form-group half">
+                            <label>E-mail</label>
+                            <input
+                            type="text"
+                            name="Email"
+                            value={form.Email}
+                            onChange={handleChange}
+                            placeholder="Digite o e-mail"
+                            required={true}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Senha</label>
-                        <input
-                        type="password"
-                        name="Senha"
-                        value={form.Senha}
-                        onChange={handleChange}
-                        placeholder="***********"
-                        required={true}
-                        />
-                    </div>
+                        <div className="form-group half">
+                            <label>Senha</label>
+                            <input
+                            type="password"
+                            name="Senha"
+                            value={form.Senha}
+                            onChange={handleChange}
+                            placeholder="***********"
+                            required={true}
+                            />
+                        </div>
 
-                    <div className="form-group">
-                        <label>Tipo de usuário</label>
-                        <select name="tipoUsuario" value={form.tipoUsuario} onChange={handleChange} required={true}>
-                            <option value="">Selecione...</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Usuario">Usuário</option>
-                        </select>
-                    </div>
+                        <div className="form-group half">
+                            <label>Tipo de usuário</label>
+                            <select name="tipoUsuario" value={form.tipoUsuario} onChange={handleChange} required={true}>
+                                <option value="">Selecione...</option>
+                                <option value="Administrador">Administrador</option>
+                                <option value="Usuario">Usuário</option>
+                            </select>
+                        </div>
 
-                    <div className="form-group">
-                        <label>Área responsável</label>
-                        <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required={form.tipoUsuario === 'Usuario'}>
-                            <option value="">Selecione...</option>
-                            <option value="Financeiro">Financeiro</option>
-                            <option value="Fiscal">Fiscal</option>
-                            <option value="Fiscal 2">Fiscal 2</option>
-                            <option value="Folha">Folha</option>
-                            <option value="GRSA">GRSA</option>
-                            <option value="Juridico">Juridico</option>
-                            <option value="Juridico Regional">Juridico Regional</option>
-                        </select>
+                        <div className="form-group half">
+                            <label>Área responsável</label>
+                            <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required={form.tipoUsuario === 'Usuario'}>
+                                <option value="">Selecione...</option>
+                                <option value="Financeiro">Financeiro</option>
+                                <option value="Fiscal">Fiscal</option>
+                                <option value="Fiscal 2">Fiscal 2</option>
+                                <option value="Folha">Folha</option>
+                                <option value="GRSA">GRSA</option>
+                                <option value="Juridico">Juridico</option>
+                                <option value="Juridico Regional">Juridico Regional</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div className="modal-buttons">

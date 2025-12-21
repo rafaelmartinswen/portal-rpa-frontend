@@ -12,6 +12,7 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, ChartDataLabels);
 
 export default function ChartProjects({ projects = [], type }) {
+    let color = "#999";
 
     // 🔥 Reduz nomes longos de Key Users e Diretores
     const reduzirNome = (nome) => {
@@ -36,14 +37,17 @@ export default function ChartProjects({ projects = [], type }) {
     switch (type) {
         case "projectsByArea":
             contagem = contarPorCampo("Area_Responsavel");
+            color = "#FF7A59";
             break;
 
         case "projectsByKeyUser":
             contagem = contarPorCampo("Key_User");
+            color = "#59a6ffff";
             break;
 
         case "projectsByDiretoria":
             contagem = contarPorCampo("Diretor");
+            color = "#3db15aff";
             break;
 
         default:
@@ -65,7 +69,7 @@ export default function ChartProjects({ projects = [], type }) {
     const maxEscala = maxValor + 1; // pode ajustar para +2 se quiser mais folga
 
     // 🔥 Altura dinâmica (aumenta conforme o número de barras)
-    const altura = Math.max(300, labels.length * 40);
+    const altura = Math.max(200, labels.length * 40);
 
     const data = {
         labels,
@@ -73,7 +77,7 @@ export default function ChartProjects({ projects = [], type }) {
             {
                 label: "",
                 data: valores,
-                backgroundColor: "#FF7A59",
+                backgroundColor: color,
                 borderRadius: 4,
                 barThickness: 10,
                 categoryPercentage: 0.6,
