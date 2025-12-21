@@ -16,10 +16,18 @@
     padding: 20px 28px;
     border-radius: 10px;
     min-width: 320px;
-    max-width: 420px;
+    max-width: 95vw;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    animation: fadeIn 0.2s ease-out;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    animation: scaleIn 0.25s ease;
+    font-family: Arial, sans-serif;
+}
+
+.modal-content h2 {
+  margin-bottom: 22px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
 }
 
 .modal-close {
