@@ -169,12 +169,13 @@ function AddProjectModal({ onClose, ambiente }) {
               <label>Diretor</label>
               <select name="Diretor" value={form.Diretor} onChange={handleChange} required={true}>
                 <option value="">Selecione...</option>
-                <option value="Cassiano">Cassiano</option>
-                <option value="Rodrigo">Rodrigo</option>
-                <option value="Guilherme">Guilherme</option>
-                <option value="Thiago">Thiago</option>
-                <option value="Adriana">Adriana</option>
-                <option value="Anderson">Anderson</option>
+                <option value="Anderson Nunes">Anderson Nunes</option>
+                <option value="Claudio Petruz">Claudio Petruz</option>
+                <option value="Cassiano José Gonçalves Vianna">Cassiano José</option>
+                <option value="Guilherme Robortella">Guilherme</option>
+                <option value="Rodrigo Marques França">Rodrigo Marques</option>
+                <option value="Thiago Nunes Costa">Thiago</option>
+                <option value="Vinicius Andrade">Vinicius</option>
               </select>
             </div>
             
