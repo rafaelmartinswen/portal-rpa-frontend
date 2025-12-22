@@ -141,7 +141,7 @@ function Production( {user, onTabChange} ) {
             <RobotCard 
               key={robot.Id} 
               robot={robot} 
-              onDelete={deleteRobot} 
+              onDelete={() => handleAction(robot.Nome, "delete", robot.Id)}
               openInfo={() => openInfoRobot(robot)} 
               user={user} 
               onTabChange={onTabChange} 
