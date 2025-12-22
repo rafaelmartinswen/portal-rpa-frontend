@@ -133,11 +133,10 @@ function AddProjectModal({ onClose, ambiente }) {
             <div className="form-group third">
               <label>Data de Criação</label>
               <input
-                type="text"
+                type="date"
                 name="Data_Criacao"
                 value={form.Data_Criacao}
                 onChange={handleChange}
-                placeholder="Ex: 2025-12-31"
                 required={true}
               />
             </div>

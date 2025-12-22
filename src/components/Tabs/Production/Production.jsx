@@ -13,7 +13,9 @@ function Production( {user, onTabChange} ) {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [openAlert, setOpenAlert] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
+  const [selectedID, setSelectedID] = useState("");
 
   useEffect(() => {
     fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
@@ -43,6 +45,7 @@ function Production( {user, onTabChange} ) {
 
       // Recarrega a lista completa de robôs
       updateRobotsList();
+      setOpenDelete(false);
       
     } catch (error) {
       console.error('Erro completo:', error);
@@ -61,9 +64,19 @@ function Production( {user, onTabChange} ) {
     setRobotInfo(robot);
   }
 
-  function handleAction(page) {
-    setSelectedPage(page);
-    setOpenAlert(true);
+  const handleConfirmDelete = async () => {
+    await deleteRobot(selectedID);
+  };
+
+  function handleAction(page, type = "", id = "") {
+    if (type === "delete") {
+      setSelectedPage(page);
+      setSelectedID(id);
+      setOpenDelete(true);
+    } else {
+      setSelectedPage(page);
+      setOpenAlert(true);
+    }
   }
 
   const robotsUnique = robots
@@ -160,6 +173,29 @@ function Production( {user, onTabChange} ) {
             <div className="confirmacao-buttons">
                 <button className="btn-nao" onClick={() => setOpenAlert(false)}>Voltar</button>
             </div>
+        </div>
+      </Modal>
+
+      <Modal open={openDelete} onClose={() => setOpenDelete(false)}>
+        <div className="confirmacao-container">
+          <div className="confirmacao-icon">
+            <FiAlertCircle size={50} />
+          </div>
+
+          <h2>Confirmação</h2>
+          <p>
+            Tem certeza que deseja <strong>Excluir</strong> o projeto{" "}
+            <strong>{selectedPage ?? ""}</strong>?
+          </p>
+
+          <div className="confirmacao-buttons">
+            <button className="btn-sim" onClick={handleConfirmDelete}>
+              Sim
+            </button>
+            <button className="btn-nao" onClick={() => setOpenDelete(false)}>
+              Não
+            </button>
+          </div>
         </div>
       </Modal>
     </div>
