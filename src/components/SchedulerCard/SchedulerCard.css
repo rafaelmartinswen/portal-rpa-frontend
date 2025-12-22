@@ -23,7 +23,9 @@
 
 /* Área da tabela */
 .scheduler-card-body {
+  width: 100%;
   overflow-x: auto; /* Scroll horizontal se necessário */
+  overflow-y: auto; /* Necessário para fixar o thead */
   max-height: 400px; /* Altura máxima do card */
 }
 
@@ -45,6 +47,9 @@
 
 /* Cabeçalho */
 .scheduler-card-body thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
