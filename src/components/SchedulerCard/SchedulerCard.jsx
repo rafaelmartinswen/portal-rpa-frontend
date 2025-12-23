@@ -5,7 +5,6 @@ import SchedulerInfoModal from "../SchedulerInfoModal/SchedulerInfoModal";
 function SchedulerCard({ cod, day }) {
     const [robots, setRobots] = useState([]);
     const [open, setOpen] = useState(true);
-    const API_URL = process.env. 
 
     // controla modal
     const [selectedRobot, setSelectedRobot] = useState(null);

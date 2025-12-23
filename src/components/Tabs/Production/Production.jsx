@@ -16,7 +16,7 @@ function Production( {user, onTabChange} ) {
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
-  const API_URL = process.env. 
+    
 
   useEffect(() => {
     fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")

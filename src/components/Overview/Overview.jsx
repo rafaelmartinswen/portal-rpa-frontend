@@ -17,7 +17,7 @@ function Overview() {
     const minRangeISO = minRange.toISOString().split("T")[0];
 
     const filteredLogs = [];
-    const API_URL = process.env. 
+      
 
     useEffect(() => {
         async function fetchVMs() {
