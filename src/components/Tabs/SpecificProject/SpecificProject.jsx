@@ -11,6 +11,7 @@ function SpecificProject({ project }) {
     const [logInconsistencias, setLogInconsistencias] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    
 
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];

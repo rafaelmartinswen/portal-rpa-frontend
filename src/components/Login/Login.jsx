@@ -6,12 +6,17 @@ function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [remember, setRemember] = useState(false);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+<<<<<<< HEAD
       const response = await fetch(`${API_BASE_URL}/auth/login`, {
+=======
+      const response = await fetch(`${API_URL}/auth/login`, {
+>>>>>>> 111ed1a45d7dc26d58d14356722110ac38007171
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })

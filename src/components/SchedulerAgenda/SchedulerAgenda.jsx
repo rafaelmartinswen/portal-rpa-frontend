@@ -4,6 +4,7 @@ import { API_BASE_URL } from "../../config/api";
 
 function SchedulerAgenda() {
     const [robots, setRobots] = useState([]);
+    
 
     useEffect(() => {
         fetch(`${API_BASE_URL}/robots`)

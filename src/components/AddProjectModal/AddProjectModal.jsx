@@ -20,6 +20,7 @@ function AddProjectModal({ onClose, ambiente }) {
     Agenda: "",
     Ambiente: ambiente
   });
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,7 +31,11 @@ function AddProjectModal({ onClose, ambiente }) {
     e.preventDefault();
 
     try {
+<<<<<<< HEAD
       const response = await fetch(`${API_BASE_URL}/robots`, {
+=======
+      const response = await fetch(`${API_URL}/robots`, {
+>>>>>>> 111ed1a45d7dc26d58d14356722110ac38007171
         method: "POST",
         headers: {
           "Content-Type": "application/json"

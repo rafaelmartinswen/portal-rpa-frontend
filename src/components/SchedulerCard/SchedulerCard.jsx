@@ -6,6 +6,7 @@ import { API_BASE_URL } from "../../config/api";
 function SchedulerCard({ cod, day }) {
     const [robots, setRobots] = useState([]);
     const [open, setOpen] = useState(true);
+    
 
     // controla modal
     const [selectedRobot, setSelectedRobot] = useState(null);
@@ -88,3 +89,4 @@ function SchedulerCard({ cod, day }) {
 }
 
 export default SchedulerCard;
+

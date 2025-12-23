@@ -21,6 +21,7 @@ function Users () {
         AreaResponsavel: "Usu"
     };
     const [form, setForm] = useState(initialFormState);
+    
 
     const loadUsers = () => {
         fetch(`${API_BASE_URL}/users`)

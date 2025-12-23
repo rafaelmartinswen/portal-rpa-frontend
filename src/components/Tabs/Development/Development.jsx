@@ -11,6 +11,7 @@ function Development( {user} ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
   const [search, setSearch] = useState("");
+  
 
   useEffect(() => {
     updateRobotsList();
