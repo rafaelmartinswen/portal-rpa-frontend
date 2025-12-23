@@ -3,15 +3,15 @@ import "./SchedulerCard.css";
 import SchedulerInfoModal from "../SchedulerInfoModal/SchedulerInfoModal";
 
 function SchedulerCard({ cod, day }) {
-
     const [robots, setRobots] = useState([]);
     const [open, setOpen] = useState(true);
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
 
     // controla modal
     const [selectedRobot, setSelectedRobot] = useState(null);
 
     useEffect(() => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+        fetch(`${API_URL}/robots`)
         .then(res => res.json())
         .then(data => setRobots(data))
         .catch(err => console.error(err));
@@ -88,3 +88,4 @@ function SchedulerCard({ cod, day }) {
 }
 
 export default SchedulerCard;
+

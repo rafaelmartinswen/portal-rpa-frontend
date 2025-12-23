@@ -16,9 +16,10 @@ function Production( {user, onTabChange} ) {
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
+  const API_URL = process.env.REACT_APP_API_URL_DEV;
 
   useEffect(() => {
-    fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+    fetch(`${API_URL}/robots`)
       .then((res) => res.json())
       .then((data) => setRobots(data))
       .catch((err) => console.error(err));
@@ -28,7 +29,7 @@ function Production( {user, onTabChange} ) {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
+      const response = await fetch(`${API_URL}/robots/${id}`, {
         method: 'DELETE',
       });
 
@@ -54,7 +55,7 @@ function Production( {user, onTabChange} ) {
   };
 
   const updateRobotsList = async () => {
-    const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+    const updatedResponse = await fetch(`${API_URL}/robots`);
     const updatedData = await updatedResponse.json();
     setRobots(updatedData);
   }
@@ -203,3 +204,4 @@ function Production( {user, onTabChange} ) {
 }
 
 export default Production;
+

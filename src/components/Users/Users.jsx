@@ -20,9 +20,10 @@ function Users () {
         AreaResponsavel: "Usu"
     };
     const [form, setForm] = useState(initialFormState);
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
 
     const loadUsers = () => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users")
+        fetch(`${API_URL}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error(err));
@@ -47,7 +48,7 @@ function Users () {
         e.preventDefault();
 
         try {
-        const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users", {
+        const response = await fetch(`${API_URL}/users`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -74,7 +75,7 @@ function Users () {
         try {
         console.log("Tentando deletar usuário:", id);
         
-        const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users/${id}`, {
+        const response = await fetch(`${API_URL}/users/${id}`, {
             method: 'DELETE',
         });
 

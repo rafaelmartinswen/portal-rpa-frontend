@@ -10,6 +10,7 @@ function Development( {user} ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
   const [search, setSearch] = useState("");
+  const API_URL = process.env.REACT_APP_API_URL_DEV;
 
   useEffect(() => {
     updateRobotsList();
@@ -19,7 +20,7 @@ function Development( {user} ) {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {method: 'DELETE',});
+      await fetch(`${API_URL}/robots/${id}`, {method: 'DELETE',});
 
       // Recarrega a lista completa de robôs
       updateRobotsList()
@@ -31,7 +32,7 @@ function Development( {user} ) {
   };
 
   const updateRobotsList = async () => {
-    const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+    const updatedResponse = await fetch(`${API_URL}/robots`);
     const updatedData = await updatedResponse.json();
     setRobots(updatedData);
   }
@@ -89,3 +90,4 @@ function Development( {user} ) {
 }
 
 export default Development;
+

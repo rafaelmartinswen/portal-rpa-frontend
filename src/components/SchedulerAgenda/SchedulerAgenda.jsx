@@ -3,9 +3,10 @@ import "./SchedulerAgenda.css";
 
 function SchedulerAgenda() {
     const [robots, setRobots] = useState([]);
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
 
     useEffect(() => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+        fetch(`${API_URL}/robots`)
         .then(res => res.json())
         .then(data => setRobots(data))
         .catch(err => console.error(err));
@@ -55,3 +56,4 @@ function SchedulerAgenda() {
 }
 
 export default SchedulerAgenda;
+

@@ -10,6 +10,7 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
 
     useEffect(() => {
         updateRobotsList();
@@ -18,7 +19,7 @@ function LandingPage({ user, onTabChange }) {
 
     const updateRobotsList = async () => {
         try {
-            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+            const res = await fetch(`${API_URL}/robots`);
             const data = await res.json();
             setRobots(data);
         } catch (error) {
@@ -28,7 +29,7 @@ function LandingPage({ user, onTabChange }) {
 
     const updateAlerts = async () => {
         try {
-            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/alertsRobots");
+            const res = await fetch(`${API_URL}/robots/alertsRobots`);
             const data = await res.json();
             setAlerts(data);
         } catch (error) {
