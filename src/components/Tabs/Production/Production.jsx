@@ -16,7 +16,7 @@ function Production( {user, onTabChange} ) {
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
-  const API_URL = process.env.REACT_APP_API_URL_DEV;
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetch(`${API_URL}/robots`)

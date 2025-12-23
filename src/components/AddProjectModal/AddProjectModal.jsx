@@ -19,7 +19,7 @@ function AddProjectModal({ onClose, ambiente }) {
     Agenda: "",
     Ambiente: ambiente
   });
-  const API_URL = process.env.REACT_APP_API_URL_DEV;
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

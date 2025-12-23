@@ -10,7 +10,7 @@ function SpecificProject({ project }) {
     const [logInconsistencias, setLogInconsistencias] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const API_URL = process.env.REACT_APP_API_URL_DEV;
+    const API_URL = process.env.REACT_APP_API_URL;
 
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];

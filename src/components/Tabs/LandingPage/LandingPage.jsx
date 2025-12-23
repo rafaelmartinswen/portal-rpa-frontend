@@ -10,7 +10,7 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
-    const API_URL = process.env.REACT_APP_API_URL_DEV;
+    const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         updateRobotsList();
