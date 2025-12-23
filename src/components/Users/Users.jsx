@@ -1,8 +1,10 @@
 import './Users.css';
 import Modal from "../Modal/Modal";
-import { useEffect, useState  } from "react";
+import { useCallback, useEffect, useState  } from "react";
 import { FaCircleUser } from "react-icons/fa6";
 import { FiAlertCircle } from "react-icons/fi";
+
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Users () {
     const [search, setSearch] = useState("");
@@ -20,18 +22,16 @@ function Users () {
         AreaResponsavel: "Usu"
     };
     const [form, setForm] = useState(initialFormState);
-    const API_URL = process.env.REACT_APP_API_URL;
-
-    const loadUsers = () => {
+    const loadUsers = useCallback(() => {
         fetch(`${API_URL}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error(err));
-    };
+    }, []);
 
     useEffect(() => {
         loadUsers();
-    }, []);
+    }, [loadUsers]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });

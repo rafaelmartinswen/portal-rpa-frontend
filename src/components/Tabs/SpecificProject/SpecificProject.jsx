@@ -4,13 +4,14 @@ import ChartProcessing from "../../Charts/ChartProcessing";
 import ChartStatus from "../../Charts/ChartStatus";
 import "./SpecificProject.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function SpecificProject({ project }) {
     const [listaInicial, setListaInicial] = useState([]);
     const [logExec, setLogExec] = useState([]);
     const [logInconsistencias, setLogInconsistencias] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const API_URL = process.env.REACT_APP_API_URL;
 
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];

@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import "./SchedulerCard.css";
 import SchedulerInfoModal from "../SchedulerInfoModal/SchedulerInfoModal";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function SchedulerCard({ cod, day }) {
     const [robots, setRobots] = useState([]);
     const [open, setOpen] = useState(true);
-    const API_URL = process.env.REACT_APP_API_URL;
 
     // controla modal
     const [selectedRobot, setSelectedRobot] = useState(null);

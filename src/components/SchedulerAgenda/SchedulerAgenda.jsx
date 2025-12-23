@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./SchedulerAgenda.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function SchedulerAgenda() {
     const [robots, setRobots] = useState([]);
-    const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         fetch(`${API_URL}/robots`)
