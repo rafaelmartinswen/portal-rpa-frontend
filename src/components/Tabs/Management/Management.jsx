@@ -16,7 +16,7 @@ function Management() {
 
   return (
     <div className="management">
-      <div className="top-management">
+      <div className="top-management" style={{background: "transparent"}}>
         <div className="text-content">
           <h3>Tela de gerenciamento</h3>
           <h1>Obtenha visibilidade completa do seu ecossistema de RPA</h1>

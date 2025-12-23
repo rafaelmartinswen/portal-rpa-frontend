@@ -17,8 +17,8 @@ function Production( {user, onTabChange} ) {
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
     
-
   useEffect(() => {
     fetch(`${API_BASE_URL}/robots`)
       .then((res) => res.json())
@@ -99,42 +99,80 @@ function Production( {user, onTabChange} ) {
     robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const areaOptions = Array.from(
+    new Set(
+      robotsUnique
+        .map((robot) => robot.Area_Responsavel)
+        .filter((area) => area && area.trim() !== "")
+    )
+  ).sort();
+
   return (
     <div className="production">
       {isInfoOpen && <RobotInfoModal robot={robotInfo} onClose={() => setIsInfoOpen(false)}/>}
       {isAddOpen && <AddProjectModal onClose={() => setIsAddOpen(false)} ambiente="Prod"/>}
       
       <div className="top-management">
-        <div className="text-content">
+        <div className="top-management-header">
           <h3>Projetos em produção</h3>
           <h2>Listagem de projetos ativos</h2>
         </div>
-        <div className="feature-cards">
-          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
-            <h4 style={{fontSize: "14px", textAlign: "center"}}>Agendamentos</h4>
+
+        <div className="top-management-stats">
+          <div className="stat-card">
+            <span className="stat-title">Agendamentos</span>
             <button>Acessar</button>
           </div>
-          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
-            <h4 style={{fontSize: "14px", textAlign: "center"}}>Histórico de execuções</h4>
+
+          <div className="stat-card">
+            <span className="stat-title">Histórico</span>
             <button>Acessar</button>
           </div>
-          <div className="top-management-card" style={{borderBottom: "3px solid #2D3E50"}}>
-            <h4 style={{fontSize: "14px", textAlign: "center"}}>Quantidade de projetos</h4>
-            <p style={{textAlign: "center"}}>{robotsUnique.length}</p>
+
+          <div className="stat-card highlight">
+            <span className="stat-title">Quantidade de projetos</span>
+            <span className="stat-value">{robotsUnique.length}</span>
           </div>
         </div>
       </div>
 
-      <div className='search-tabs'>
-        <input 
-          type='text' 
-          placeholder='Pesquisar' 
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {user.role === 'Administrador' && (
-            <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
-        )}
+      <div className="topbar">
+        <div className="left">
+          <button className="icon-btn">
+            ☰
+          </button>
+
+          <button className="icon-btn grid">
+            ⬚⬚
+          </button>
+
+          <input
+            type="text"
+            className="search"
+            placeholder="Buscar por nome, sigla ou área..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <div className="right">
+          <select
+            className="select"
+            value={selectedArea}
+            onChange={(e) => setSelectedArea(e.target.value)}
+          >
+            <option value="">Todas as áreas</option>
+            {areaOptions.map((area) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            ))}
+          </select>
+
+          <div className="filters">
+            <button className="filter active" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+          </div>
+        </div>
       </div>
 
       <div className="robot-cards-container">

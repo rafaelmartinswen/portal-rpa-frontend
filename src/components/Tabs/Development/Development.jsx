@@ -11,7 +11,7 @@ function Development( {user} ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
   const [search, setSearch] = useState("");
-
+  
   useEffect(() => {
     updateRobotsList();
   }, []);
@@ -62,14 +62,48 @@ function Development( {user} ) {
       {isInfoOpen && <RobotInfoModal robot={robotInfo} onClose={() => setIsInfoOpen(false)}/>}
       {isAddOpen && <AddProjectModal onClose={() => setIsAddOpen(false)} ambiente="Dev"/>}
 
-      <div className='search-tabs'>
-        <input 
-          type='text' 
-          placeholder='Pesquisar' 
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button className="button-tabs" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+      <div className="top-management">
+        <div className="top-management-header">
+          <h3>Projetos em desenvolvimento</h3>
+          <h2>Listagem de projetos ativos</h2>
+        </div>
+
+        <div className="top-management-stats">
+          <div className="stat-card highlight">
+            <span className="stat-title">Projetos ativos</span>
+            <span className="stat-value">{robotsUnique.length}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="topbar">
+        <div className="left">
+          <button className="icon-btn">
+            ☰
+          </button>
+
+          <button className="icon-btn grid">
+            ⬚⬚
+          </button>
+
+          <input
+            type="text"
+            className="search"
+            placeholder="Buscar por nome, sigla ou área..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+
+        <div className="right">
+          <select className="select">
+            <option>Todas as áreas</option>
+          </select>
+
+          <div className="filters">
+            <button className="filter active" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+          </div>
+        </div>
       </div>
 
       <div className="robot-cards-container">

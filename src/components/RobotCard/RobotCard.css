@@ -1,23 +1,23 @@
 .robot-cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
 }
 
-/* CARD BASE */
 .robot-card {
-  flex: 0 0 calc(50% - 0.75rem);
-  box-sizing: border-box;
-  /* width: 45%; */
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-top: 10px solid #2D3E50;
+  /* background: #1E2A36; */
   border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: 1px solid #2c374a; */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  border-top: 10px solid #2D3E50;
+  background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  padding: 20px;
-  margin-top: 1.5rem;
-  transition: transform 0.2s ease;
-  cursor: default;
 }
 
 .robot-card:hover {
@@ -28,15 +28,15 @@
   cursor: pointer;
 }
 
-/* HEADER */
 .robot-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
 }
 
 .robot-card-header h3 {
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   font-weight: 600;
   color: #1f2937;
 }
