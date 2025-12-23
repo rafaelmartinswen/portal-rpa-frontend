@@ -10,7 +10,6 @@ function SpecificProject({ project }) {
     const [logInconsistencias, setLogInconsistencias] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const API_URL = process.env.REACT_APP_API_URL;
 
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];
@@ -34,7 +33,7 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`${API_URL}/robots/lista-inicial/${project}`, setListaInicial);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/lista-inicial/${project}`, setListaInicial);
         };
 
         load();
@@ -47,8 +46,8 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`${API_URL}/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
-            fetchData(`${API_URL}/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
+            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
         };
 
         load();

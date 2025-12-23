@@ -10,14 +10,15 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
+    
     useEffect(() => {
         updateRobotsList();
         updateAlerts();
-      }, [updateRobotsList, updateAlerts]);
-
-    const updateRobotsList = useCallback(async () => {
+      }, []);
+    
+    const updateRobotsList = async () => {
         try {
-            const res = await fetch(`${API_URL}/robots`);
+            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
             const data = await res.json();
             setRobots(data);
         } catch (error) {
@@ -27,13 +28,13 @@ function LandingPage({ user, onTabChange }) {
 
     const updateAlerts = async () => {
         try {
-            const res = await fetch(`${API_URL}/robots/alertsRobots`);
+            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/alertsRobots");
             const data = await res.json();
             setAlerts(data);
         } catch (error) {
             console.error("Erro ao buscar alertas:", error);
         }
-    }, []);
+    }
 
     function handleAction(page) {
         setSelectedPage(page);

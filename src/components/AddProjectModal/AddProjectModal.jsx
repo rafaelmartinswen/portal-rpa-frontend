@@ -19,7 +19,6 @@ function AddProjectModal({ onClose, ambiente }) {
     Agenda: "",
     Ambiente: ambiente
   });
-  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,7 +29,7 @@ function AddProjectModal({ onClose, ambiente }) {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/robots`, {
+      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
