@@ -3,8 +3,6 @@ import "./Overview.css";
 import ChartProcessing from "../Charts/ChartProcessing";
 import { MdPlayArrow, MdRefresh, MdAddCircle } from "react-icons/md";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 function Overview() {
     const [robots, setRobots] = useState([]);
     const [vms, setVms] = useState([]);
@@ -19,6 +17,7 @@ function Overview() {
     const minRangeISO = minRange.toISOString().split("T")[0];
 
     const filteredLogs = [];
+    const API_URL = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         async function fetchVMs() {

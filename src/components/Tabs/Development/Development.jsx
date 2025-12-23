@@ -1,10 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Development.css";
 import RobotCard from "../../RobotCard/RobotCard";
 import AddProjectModal from "../../AddProjectModal/AddProjectModal"; // JS normal
 import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 function Development( {user} ) {
   const [robots, setRobots] = useState([]);
@@ -12,15 +10,11 @@ function Development( {user} ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
   const [search, setSearch] = useState("");
-  const updateRobotsList = useCallback(async () => {
-    const updatedResponse = await fetch(`${API_URL}/robots`);
-    const updatedData = await updatedResponse.json();
-    setRobots(updatedData);
-  }, []);
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     updateRobotsList();
-  }, [updateRobotsList]);
+  }, []);
 
   const deleteRobot = async (id) => {
     try {
@@ -36,6 +30,12 @@ function Development( {user} ) {
       throw error;
     }
   };
+
+  const updateRobotsList = async () => {
+    const updatedResponse = await fetch(`${API_URL}/robots`);
+    const updatedData = await updatedResponse.json();
+    setRobots(updatedData);
+  }
 
   const openInfoRobot = async (robot) => {
     setIsInfoOpen(true);

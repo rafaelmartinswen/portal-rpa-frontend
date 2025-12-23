@@ -1,10 +1,8 @@
 import './VirtualMachines.css';
 import Modal from "../Modal/Modal";
-import { useCallback, useEffect, useState  } from "react";
+import { useEffect, useState  } from "react";
 import { IoIosLaptop } from "react-icons/io";
 import { FiAlertCircle } from "react-icons/fi";
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 function VirtualMachines() {
     const [search, setSearch] = useState("");
@@ -12,7 +10,9 @@ function VirtualMachines() {
     const [openActionVM, setOpenActionVM] = useState(false);
     const [selectedVM, setSelectedVM] = useState(null);
     const [selectedAction, setSelectedAction] = useState(null);
-    const fetchVMs = useCallback(async () => {
+    const API_URL = process.env.REACT_APP_API_URL;
+
+    async function fetchVMs() {
         try {
         const response = await fetch(`${API_URL}/azure/listar-vms`, {
             method: "POST",
@@ -27,11 +27,11 @@ function VirtualMachines() {
         } catch (error) {
         console.error("Erro ao buscar VMs:", error);
         }
-    }, []);
+    }
 
     useEffect(() => {
         fetchVMs();
-    }, [fetchVMs]);
+    }, []);
 
     const filteredVMs = vms.filter(vm =>
         vm?.name?.toLowerCase().includes(search.toLowerCase())

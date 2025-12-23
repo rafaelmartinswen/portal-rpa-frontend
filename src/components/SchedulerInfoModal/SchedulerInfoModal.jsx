@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import "./SchedulerInfoModal.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 function SchedulerInfoModal({ robot, onClose }) {
     const [lista, setLista] = useState([]);
+    const API_URL = process.env.REACT_APP_API_URL;
     
     useEffect(() => {
         if (!robot) return;

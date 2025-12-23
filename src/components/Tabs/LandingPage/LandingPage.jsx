@@ -1,23 +1,23 @@
 import './LandingPage.css';
 import Modal from "../../Modal/Modal";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiRobot3Fill } from "react-icons/ri";
 import { FiPlayCircle, FiClock, FiActivity, FiAlertCircle } from "react-icons/fi";
 import { IoAlertSharp } from "react-icons/io5";
-
-const API_URL = process.env.REACT_APP_API_URL;
 
 function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
+    const API_URL = process.env.REACT_APP_API_URL;
+
     useEffect(() => {
         updateRobotsList();
         updateAlerts();
-      }, [updateRobotsList, updateAlerts]);
+      }, []);
 
-    const updateRobotsList = useCallback(async () => {
+    const updateRobotsList = async () => {
         try {
             const res = await fetch(`${API_URL}/robots`);
             const data = await res.json();
@@ -25,9 +25,9 @@ function LandingPage({ user, onTabChange }) {
         } catch (error) {
             console.error("Erro ao buscar robôs:", error);
         }
-    }, []);
+    };
 
-    const updateAlerts = useCallback(async () => {
+    const updateAlerts = async () => {
         try {
             const res = await fetch(`${API_URL}/robots/alertsRobots`);
             const data = await res.json();
@@ -35,7 +35,7 @@ function LandingPage({ user, onTabChange }) {
         } catch (error) {
             console.error("Erro ao buscar alertas:", error);
         }
-    }, []);
+    }
 
     function handleAction(page) {
         setSelectedPage(page);
@@ -235,4 +235,3 @@ function OvAlertStopped({ alert }) {
 }
 
 export default LandingPage;
-

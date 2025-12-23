@@ -6,8 +6,6 @@ import AddProjectModal from "../../AddProjectModal/AddProjectModal";
 import Modal from "../../Modal/Modal";
 import { FiAlertCircle } from "react-icons/fi";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 function Production( {user, onTabChange} ) {
   const [robots, setRobots] = useState([]);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -18,6 +16,7 @@ function Production( {user, onTabChange} ) {
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
+  const API_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetch(`${API_URL}/robots`)
