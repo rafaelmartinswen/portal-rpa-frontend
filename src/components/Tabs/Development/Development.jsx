@@ -3,6 +3,7 @@ import "./Development.css";
 import RobotCard from "../../RobotCard/RobotCard";
 import AddProjectModal from "../../AddProjectModal/AddProjectModal"; // JS normal
 import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
+import { API_BASE_URL } from "../../../config/api";
 
 function Development( {user} ) {
   const [robots, setRobots] = useState([]);
@@ -19,7 +20,7 @@ function Development( {user} ) {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
+      await fetch(`${API_BASE_URL}/robots/${id}`, {
         method: 'DELETE',
       });
 
@@ -33,7 +34,7 @@ function Development( {user} ) {
   };
 
   const updateRobotsList = async () => {
-    const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+    const updatedResponse = await fetch(`${API_BASE_URL}/robots`);
     const updatedData = await updatedResponse.json();
     setRobots(updatedData);
   }

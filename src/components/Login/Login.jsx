@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Login.css";
+import { API_BASE_URL } from "../../config/api";
 
 function Login({ onLogin }) {
   const [user, setUser] = useState("");
@@ -10,7 +11,7 @@ function Login({ onLogin }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./AddProjectModal.css";
+import { API_BASE_URL } from "../../config/api";
 
 function AddProjectModal({ onClose, ambiente }) {
   const [form, setForm] = useState({
@@ -29,7 +30,7 @@ function AddProjectModal({ onClose, ambiente }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots", {
+      const response = await fetch(`${API_BASE_URL}/robots`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

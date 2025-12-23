@@ -1,8 +1,9 @@
-import './Users.css';
+import "./Users.css";
 import Modal from "../Modal/Modal";
 import { useEffect, useState  } from "react";
 import { FaCircleUser } from "react-icons/fa6";
 import { FiAlertCircle } from "react-icons/fi";
+import { API_BASE_URL } from "../../config/api";
 
 function Users () {
     const [search, setSearch] = useState("");
@@ -22,7 +23,7 @@ function Users () {
     const [form, setForm] = useState(initialFormState);
 
     const loadUsers = () => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users")
+        fetch(`${API_BASE_URL}/users`)
             .then((res) => res.json())
             .then((data) => setUsers(data))
             .catch((err) => console.error(err));
@@ -47,7 +48,7 @@ function Users () {
         e.preventDefault();
 
         try {
-        const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users", {
+        const response = await fetch(`${API_BASE_URL}/users`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -74,7 +75,7 @@ function Users () {
         try {
         console.log("Tentando deletar usuário:", id);
         
-        const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/users/${id}`, {
+        const response = await fetch(`${API_BASE_URL}/users/${id}`, {
             method: 'DELETE',
         });
 

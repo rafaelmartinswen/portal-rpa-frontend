@@ -1,8 +1,9 @@
-import './VirtualMachines.css';
+import "./VirtualMachines.css";
 import Modal from "../Modal/Modal";
 import { useEffect, useState  } from "react";
 import { IoIosLaptop } from "react-icons/io";
 import { FiAlertCircle } from "react-icons/fi";
+import { API_BASE_URL } from "../../config/api";
 
 function VirtualMachines() {
     const [search, setSearch] = useState("");
@@ -13,7 +14,7 @@ function VirtualMachines() {
 
     async function fetchVMs() {
         try {
-        const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/listar-vms", {
+        const response = await fetch(`${API_BASE_URL}/azure/listar-vms`, {
             method: "POST",
             headers: {
             "Content-Type": "application/json"
@@ -44,7 +45,7 @@ function VirtualMachines() {
 
     async function confirmAction() {
         try {
-            const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/acao-vm", {
+            const response = await fetch(`${API_BASE_URL}/azure/acao-vm`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

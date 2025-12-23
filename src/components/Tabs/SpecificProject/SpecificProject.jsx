@@ -3,6 +3,7 @@ import { gerarExcel } from "../../../utils/excel";
 import ChartProcessing from "../../Charts/ChartProcessing";
 import ChartStatus from "../../Charts/ChartStatus";
 import "./SpecificProject.css";
+import { API_BASE_URL } from "../../../config/api";
 
 function SpecificProject({ project }) {
     const [listaInicial, setListaInicial] = useState([]);
@@ -33,7 +34,7 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/lista-inicial/${project}`, setListaInicial);
+            fetchData(`${API_BASE_URL}/robots/lista-inicial/${project}`, setListaInicial);
         };
 
         load();
@@ -46,8 +47,8 @@ function SpecificProject({ project }) {
         if (!project) return;
 
         const load = () => {
-            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
-            fetchData(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
+            fetchData(`${API_BASE_URL}/robots/log-exec/${project}?Status_Processo=0`, setLogExec);
+            fetchData(`${API_BASE_URL}/robots/log-exec/${project}?Status_Processo=-1`, setLogInconsistencias);
         };
 
         load();

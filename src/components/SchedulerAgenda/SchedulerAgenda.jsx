@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./SchedulerAgenda.css";
+import { API_BASE_URL } from "../../config/api";
 
 function SchedulerAgenda() {
     const [robots, setRobots] = useState([]);
 
     useEffect(() => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+        fetch(`${API_BASE_URL}/robots`)
         .then(res => res.json())
         .then(data => setRobots(data))
         .catch(err => console.error(err));

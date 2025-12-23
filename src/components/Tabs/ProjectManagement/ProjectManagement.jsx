@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import './ProjectManagement.css'
+import "./ProjectManagement.css";
 import ChartProjects from "../../Charts/ChartProjects";
+import { API_BASE_URL } from "../../../config/api";
 
 function ProjectManagement() {
     const [robots, setRobots] = useState([]);
@@ -11,7 +12,7 @@ function ProjectManagement() {
     
     const updateRobotsList = async () => {
         try {
-            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+            const res = await fetch(`${API_BASE_URL}/robots`);
             const data = await res.json();
             setRobots(data);
         } catch (error) {

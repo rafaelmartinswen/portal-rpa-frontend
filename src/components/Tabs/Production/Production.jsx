@@ -5,6 +5,7 @@ import RobotInfoModal from "../../RobotInfoModal/RobotInfoModal";
 import AddProjectModal from "../../AddProjectModal/AddProjectModal";
 import Modal from "../../Modal/Modal";
 import { FiAlertCircle } from "react-icons/fi";
+import { API_BASE_URL } from "../../../config/api";
 
 function Production( {user, onTabChange} ) {
   const [robots, setRobots] = useState([]);
@@ -19,7 +20,7 @@ function Production( {user, onTabChange} ) {
     
 
   useEffect(() => {
-    fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+    fetch(`${API_BASE_URL}/robots`)
       .then((res) => res.json())
       .then((data) => setRobots(data))
       .catch((err) => console.error(err));
@@ -29,7 +30,7 @@ function Production( {user, onTabChange} ) {
     try {
       console.log("Tentando deletar robô com ID:", id);
       
-      const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/robots/${id}`, {
         method: "DELETE",
       });
 
@@ -55,7 +56,7 @@ function Production( {user, onTabChange} ) {
   };
 
   const updateRobotsList = async () => {
-    const updatedResponse = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+    const updatedResponse = await fetch(`${API_BASE_URL}/robots`);
     const updatedData = await updatedResponse.json();
     setRobots(updatedData);
   }

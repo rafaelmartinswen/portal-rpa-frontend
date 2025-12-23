@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./Overview.css";
 import ChartProcessing from "../Charts/ChartProcessing";
 import { MdPlayArrow, MdRefresh, MdAddCircle } from "react-icons/md";
+import { API_BASE_URL } from "../../config/api";
 
 function Overview() {
     const [robots, setRobots] = useState([]);
@@ -22,7 +23,7 @@ function Overview() {
     useEffect(() => {
         async function fetchVMs() {
             try {
-            const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/listar-vms", {
+            const response = await fetch(`${API_BASE_URL}/azure/listar-vms`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
@@ -41,7 +42,7 @@ function Overview() {
     }, []);
 
     useEffect(() => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+        fetch(`${API_BASE_URL}/robots`)
         .then((res) => res.json())
         .then((data) => setRobots(data))
         .catch((err) => console.error(err));

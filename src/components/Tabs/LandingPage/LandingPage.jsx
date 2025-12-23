@@ -1,9 +1,10 @@
-import './LandingPage.css';
+import "./LandingPage.css";
 import Modal from "../../Modal/Modal";
 import { useEffect, useState } from "react";
 import { RiRobot3Fill } from "react-icons/ri";
 import { FiPlayCircle, FiClock, FiActivity, FiAlertCircle } from "react-icons/fi";
 import { IoAlertSharp } from "react-icons/io5";
+import { API_BASE_URL } from "../../../config/api";
 
 function LandingPage({ user, onTabChange }) {
     const [robots, setRobots] = useState([]);
@@ -18,7 +19,7 @@ function LandingPage({ user, onTabChange }) {
     
     const updateRobotsList = async () => {
         try {
-            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots");
+            const res = await fetch(`${API_BASE_URL}/robots`);
             const data = await res.json();
             setRobots(data);
         } catch (error) {
@@ -28,7 +29,7 @@ function LandingPage({ user, onTabChange }) {
 
     const updateAlerts = async () => {
         try {
-            const res = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/alertsRobots");
+            const res = await fetch(`${API_BASE_URL}/robots/alertsRobots`);
             const data = await res.json();
             setAlerts(data);
         } catch (error) {
