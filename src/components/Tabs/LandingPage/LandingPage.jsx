@@ -10,14 +10,12 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
-    const API_URL = process.env.REACT_APP_API_URL;
-
     useEffect(() => {
         updateRobotsList();
         updateAlerts();
-      }, []);
+      }, [updateRobotsList, updateAlerts]);
 
-    const updateRobotsList = async () => {
+    const updateRobotsList = useCallback(async () => {
         try {
             const res = await fetch(`${API_URL}/robots`);
             const data = await res.json();
@@ -35,7 +33,7 @@ function LandingPage({ user, onTabChange }) {
         } catch (error) {
             console.error("Erro ao buscar alertas:", error);
         }
-    }
+    }, []);
 
     function handleAction(page) {
         setSelectedPage(page);

@@ -4,13 +4,11 @@ import ChartProjects from "../../Charts/ChartProjects";
 
 function ProjectManagement() {
     const [robots, setRobots] = useState([]);
-    const API_URL = process.env.REACT_APP_API_URL;
-
     useEffect(() => {
         updateRobotsList();
-      }, []);
+      }, [updateRobotsList]);
     
-    const updateRobotsList = async () => {
+    const updateRobotsList = useCallback(async () => {
         try {
             const res = await fetch(`${API_URL}/robots`);
             const data = await res.json();
@@ -18,7 +16,7 @@ function ProjectManagement() {
         } catch (error) {
             console.error("Erro ao buscar robôs:", error);
         }
-    };
+    }, []);
 
     return (
         <div className='projectmanagement'>
