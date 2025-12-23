@@ -5,12 +5,13 @@ function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [remember, setRemember] = useState(false);
+  const API_URL = process.env.REACT_APP_API_URL_DEV;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/auth/login", {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user, pass })
@@ -97,3 +98,4 @@ function Login({ onLogin }) {
 }
 
 export default Login;
+

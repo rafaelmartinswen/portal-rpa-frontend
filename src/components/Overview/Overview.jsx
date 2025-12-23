@@ -17,11 +17,12 @@ function Overview() {
     const minRangeISO = minRange.toISOString().split("T")[0];
 
     const filteredLogs = [];
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
 
     useEffect(() => {
         async function fetchVMs() {
             try {
-            const response = await fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/azure/listar-vms", {
+            const response = await fetch(`${API_URL}/azure/listar-vms`, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json"
@@ -40,7 +41,7 @@ function Overview() {
     }, []);
 
     useEffect(() => {
-        fetch("https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots")
+        fetch(`${API_URL}/robots`)
         .then((res) => res.json())
         .then((data) => setRobots(data))
         .catch((err) => console.error(err));
@@ -156,3 +157,4 @@ function Overview() {
 }
 
 export default Overview;
+

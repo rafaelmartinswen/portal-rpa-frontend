@@ -3,13 +3,14 @@ import "./SchedulerInfoModal.css";
 
 function SchedulerInfoModal({ robot, onClose }) {
     const [lista, setLista] = useState([]);
+    const API_URL = process.env.REACT_APP_API_URL_DEV;
     
     useEffect(() => {
         if (!robot) return;
 
         const fetchData = async () => {
         try {
-            const response = await fetch(`https://portal-rpa-backend.bravedune-0c4b692e.eastus2.azurecontainerapps.io/robots/lista-inicial/${robot.Sigla_DB}`);
+            const response = await fetch(`${API_URL}/robots/lista-inicial/${robot.Sigla_DB}`);
             const data = await response.json();
             setLista(data);
         } catch (err) {
@@ -84,3 +85,4 @@ function SchedulerInfoModal({ robot, onClose }) {
 }
 
 export default SchedulerInfoModal;
+
