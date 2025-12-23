@@ -6,7 +6,6 @@ import { API_BASE_URL } from "../../../config/api";
 function ProjectManagement() {
     const [robots, setRobots] = useState([]);
     
-
     useEffect(() => {
         updateRobotsList();
       }, []);
@@ -23,7 +22,7 @@ function ProjectManagement() {
 
     return (
         <div className='projectmanagement'>
-            <div className="top-management">
+            <div className="top-management" style={{background: "transparent"}}>
                 <div className="text-content">
                 <h2>Gestão dos projetos RPA</h2>
                 </div>
