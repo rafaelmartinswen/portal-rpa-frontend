@@ -12,6 +12,11 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
+    useEffect(() => {
+        updateRobotsList();
+        updateAlerts();
+      }, [updateRobotsList, updateAlerts]);
+
     const updateRobotsList = useCallback(async () => {
         try {
             const res = await fetch(`${API_URL}/robots`);
@@ -31,11 +36,6 @@ function LandingPage({ user, onTabChange }) {
             console.error("Erro ao buscar alertas:", error);
         }
     }, []);
-
-    useEffect(() => {
-        updateRobotsList();
-        updateAlerts();
-      }, [updateRobotsList, updateAlerts]);
 
     function handleAction(page) {
         setSelectedPage(page);

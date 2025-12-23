@@ -6,6 +6,10 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 function ProjectManagement() {
     const [robots, setRobots] = useState([]);
+    useEffect(() => {
+        updateRobotsList();
+      }, [updateRobotsList]);
+    
     const updateRobotsList = useCallback(async () => {
         try {
             const res = await fetch(`${API_URL}/robots`);
@@ -15,10 +19,6 @@ function ProjectManagement() {
             console.error("Erro ao buscar robôs:", error);
         }
     }, []);
-
-    useEffect(() => {
-        updateRobotsList();
-      }, [updateRobotsList]);
 
     return (
         <div className='projectmanagement'>
