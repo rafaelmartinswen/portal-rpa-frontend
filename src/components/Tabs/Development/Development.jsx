@@ -11,6 +11,7 @@ function Development( {user} ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [robotInfo, setRobotInfo] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
   
   useEffect(() => {
     updateRobotsList();
@@ -51,11 +52,21 @@ function Development( {user} ) {
         index === self.findIndex((r) => r.Nome === robot.Nome) // remove duplicados
   );
 
-  const filteredRobots = robotsUnique.filter(robot =>
-    robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
-    robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
-    robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())
+  const filteredRobots = robotsUnique.filter(
+    (robot) =>
+      (robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
+        robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
+        robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())) &&
+      (selectedArea === "" || robot.Area_Responsavel === selectedArea)
   );
+
+  const areaOptions = Array.from(
+    new Set(
+      robotsUnique
+        .map((robot) => robot.Area_Responsavel)
+        .filter((area) => area && area.trim() !== "")
+    )
+  ).sort();
 
   return (
     <div className="development">
@@ -109,7 +120,13 @@ function Development( {user} ) {
       <div className="robot-cards-container">
         {filteredRobots.length > 0 ? (
           filteredRobots.map((robot) => (
-            <RobotCard key={robot.Id} robot={robot} onDelete={deleteRobot} openInfo={() => openInfoRobot(robot)} user={user}/>
+            <RobotCard 
+              key={robot.Id} 
+              robot={robot} 
+              onDelete={deleteRobot} 
+              openInfo={() => openInfoRobot(robot)} 
+              user={user}
+            />
           ))
         ) : (
           <div className="empty-robots" style={{ textAlign: "center", width: "100%", padding: "48px 0" }}>

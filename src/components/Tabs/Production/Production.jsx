@@ -93,10 +93,12 @@ function Production( {user, onTabChange} ) {
         index === self.findIndex((r) => r.Nome === robot.Nome) // remove duplicados
   );
 
-  const filteredRobots = robotsUnique.filter(robot =>
-    robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
-    robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
-    robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())
+  const filteredRobots = robotsUnique.filter(
+    (robot) =>
+      (robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
+        robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
+        robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())) &&
+      (selectedArea === "" || robot.Area_Responsavel === selectedArea)
   );
 
   const areaOptions = Array.from(
