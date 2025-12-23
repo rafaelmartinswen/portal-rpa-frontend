@@ -107,8 +107,17 @@ function Development( {user} ) {
         </div>
 
         <div className="right">
-          <select className="select">
-            <option>Todas as áreas</option>
+          <select
+            className="select"
+            value={selectedArea}
+            onChange={(e) => setSelectedArea(e.target.value)}
+          >
+            <option value="">Todas as áreas</option>
+            {areaOptions.map((area) => (
+              <option key={area} value={area}>
+                {area}
+              </option>
+            ))}
           </select>
 
           <div className="filters">
