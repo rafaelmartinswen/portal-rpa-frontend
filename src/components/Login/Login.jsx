@@ -5,7 +5,7 @@ function Login({ onLogin }) {
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
   const [remember, setRemember] = useState(false);
-  const API_URL = process.env.REACT_APP_API_URL_DEV;
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
