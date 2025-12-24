@@ -131,6 +131,10 @@ function AddProjectModal({ onClose, ambiente }) {
                 <option value="">Selecione...</option>
                 <option value="Cassiano">Cassiano</option>
                 <option value="Rodrigo">Rodrigo</option>
+                <option value="Guilherme">Guilherme</option>
+                <option value="Thiago">Thiago</option>
+                <option value="Adriana">Adriana</option>
+                <option value="Anderson">Anderson</option>
               </select>
             </div>
 
