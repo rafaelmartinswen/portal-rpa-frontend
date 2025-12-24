@@ -1,5 +1,3 @@
-import "./RobotInfoModal.css";
-
 function RobotInfoModal({ robot, onClose }) {
   if (!robot) return null;
 

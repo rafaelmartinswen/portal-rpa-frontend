@@ -18,6 +18,9 @@ function AddProjectModal({ onClose, ambiente }) {
     Tecnologias_Utilizadas: "", 
     Qtd_Robos: "1", 
     Agenda: "",
+    tt_min_exec: "",
+    tt_exec_semana: "",
+    tt_semana: "",
     Ambiente: ambiente
   });
 
@@ -52,176 +55,131 @@ function AddProjectModal({ onClose, ambiente }) {
   };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Adicionar Robô</h2>
+    <div className="apm-overlay">
+      <div className="apm-modal">
 
-        <form onSubmit={handleSave}>
-          <div className="form-grid">
+        {/* HEADER */}
+        <div className="apm-header">
+          <h2>Adicionar Robô</h2>
+          <button className="apm-btn-close" onClick={onClose}>×</button>
+        </div>
 
-            <div className="form-group half">
+        {/* FORM */}
+        <form className="apm-form" onSubmit={handleSave}>
+          <div className="apm-grid">
+
+            <h3 className="apm-section">Informações Básicas</h3>
+
+            <div className="apm-group third">
               <label>Identificador</label>
-              <input
-                type="text"
-                name="Identificador"
-                value={form.Identificador}
-                onChange={handleChange}
-                placeholder="Digite o identificador"
-                required={true}
-              />
+              <input name="Identificador" value={form.Identificador} onChange={handleChange} required />
             </div>
 
-            <div className="form-group half">
+            <div className="apm-group third">
               <label>Nome do Robô</label>
-              <input
-                type="text"
-                name="Nome"
-                value={form.Nome}
-                onChange={handleChange}
-                placeholder="Digite o nome"
-                required={true}
-              />
+              <input name="Nome" value={form.Nome} onChange={handleChange} required />
             </div>
 
-            <div className="form-group half">
-              <label>Descrição</label>
-              <input
-                type="text"
-                name="Descricao"
-                value={form.Descricao}
-                onChange={handleChange}
-                placeholder="Descrição"
-                required={true}
-              />
-            </div>
-
-            <div className="form-group half">
-              <label>Objetivo</label>
-              <input
-                type="text"
-                name="Objetivo"
-                value={form.Objetivo}
-                onChange={handleChange}
-                placeholder="Objetivo"
-                required={true}
-              />
-            </div>
-
-            <div className="form-group third">
-              <label>Key User</label>
-              <input
-                type="text"
-                name="Key_User"
-                value={form.Key_User}
-                onChange={handleChange}
-                placeholder="Digite o key user"
-                required={true}
-              />
-            </div>
-
-            <div className="form-group third">
+            <div className="apm-group third">
               <label>Sigla DB</label>
-              <input
-                type="text"
-                name="SiglaDB"
-                value={form.SiglaDB}
-                onChange={handleChange}
-                placeholder="Nome do projeto no DB"
-                required={true}
-              />
+              <input name="SiglaDB" value={form.SiglaDB} onChange={handleChange} required />
             </div>
 
-            <div className="form-group third">
-              <label>Data de Criação</label>
-              <input
-                type="date"
-                name="Data_Criacao"
-                value={form.Data_Criacao}
-                onChange={handleChange}
-                required={true}
-              />
+            <div className="apm-group full">
+              <label>Descrição</label>
+              <textarea name="Descricao" rows={3} value={form.Descricao} onChange={handleChange} />
             </div>
 
-            <div className="form-group third">
-              <label>Dev. responsável</label>
-              <select name="DevResp" value={form.DevResp} onChange={handleChange} required={true}>
+            <div className="apm-group full">
+              <label>Objetivo</label>
+              <textarea name="Objetivo" rows={3} value={form.Objetivo} onChange={handleChange} />
+            </div>
+
+            <h3 className="apm-section">Responsáveis</h3>
+
+            <div className="apm-group third">
+              <label>Key User</label>
+              <input name="Key_User" value={form.Key_User} onChange={handleChange} />
+            </div>
+
+            <div className="apm-group third">
+              <label>Dev. Responsável</label>
+              <select name="DevResp" value={form.DevResp} onChange={handleChange}>
                 <option value="">Selecione...</option>
                 <option value="Vitor">Vitor</option>
                 <option value="Danilo">Danilo</option>
               </select>
             </div>
 
-            <div className="form-group third">
-              <label>Área responsável</label>
-              <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required={true}>
-                <option value="">Selecione...</option>
-                <option value="Financeiro">Financeiro</option>
-                <option value="Fiscal">Fiscal</option>
-                <option value="Fiscal 2">Fiscal 2</option>
-                <option value="Folha">Folha</option>
-                <option value="GRSA">GRSA</option>
-                <option value="Juridico">Juridico</option>
-                <option value="Juridico Regional">Juridico Regional</option>
-              </select>
-            </div>
-
-            <div className="form-group third">
+            <div className="apm-group third">
               <label>Diretor</label>
-              <select name="Diretor" value={form.Diretor} onChange={handleChange} required={true}>
+              <select name="Diretor" value={form.Diretor} onChange={handleChange}>
                 <option value="">Selecione...</option>
-                <option value="Anderson Nunes">Anderson Nunes</option>
-                <option value="Claudio Petruz">Claudio Petruz</option>
-                <option value="Cassiano José Gonçalves Vianna">Cassiano José</option>
-                <option value="Guilherme Robortella">Guilherme</option>
-                <option value="Rodrigo Marques França">Rodrigo Marques</option>
-                <option value="Thiago Nunes Costa">Thiago</option>
-                <option value="Vinicius Andrade">Vinicius</option>
+                <option value="Cassiano">Cassiano</option>
+                <option value="Rodrigo">Rodrigo</option>
               </select>
             </div>
-            
-            <div className="form-group third">
-              <label>Sistemas utilizados</label>
-              <input
-                type="text"
-                name="Sistemas_Utilizados"
-                value={form.Sistemas_Utilizados}
-                onChange={handleChange}
-                placeholder="Sistemas Utilizados"
-                required={true}
-              />
+
+            <h3 className="apm-section">Tecnologia</h3>
+
+            <div className="apm-group full">
+              <label>Sistemas Utilizados</label>
+              <textarea name="Sistemas_Utilizados" rows={2} value={form.Sistemas_Utilizados} onChange={handleChange} />
             </div>
 
-            <div className="form-group third">
-              <label>Tecnologias utilizadas</label>
-              <input
-                type="text"
-                name="Tecnologias_Utilizadas"
-                value={form.Tecnologias_Utilizadas}
-                onChange={handleChange}
-                placeholder="Tecnologias utilizadas"
-                required={true}
-              />
+            <div className="apm-group full">
+              <label>Tecnologias Utilizadas</label>
+              <textarea name="Tecnologias_Utilizadas" rows={2} value={form.Tecnologias_Utilizadas} onChange={handleChange} />
             </div>
 
-            <div className="form-group third">
+            <h3 className="apm-section">Agenda</h3>
+
+            <div className="apm-group third">
+              <label>Data de Criação</label>
+              <input type="date" name="Data_Criacao" value={form.Data_Criacao} onChange={handleChange} />
+            </div>
+
+            <div className="apm-group third">
               <label>Agenda</label>
-              <select name="Agenda" value={form.Agenda} onChange={handleChange} required={true}>
+              <select name="Agenda" value={form.Agenda} onChange={handleChange}>
                 <option value="">Selecione...</option>
-                <option value="1">Segunda-feira</option>
-                <option value="2">Terça-feira</option>
-                <option value="3">Quarta-feira</option>
-                <option value="4">Quinta-feira</option>
-                <option value="5">Sexta-feira</option>
+                <option value="1">Segunda</option>
+                <option value="2">Terça</option>
+                <option value="3">Quarta</option>
+                <option value="4">Quinta</option>
+                <option value="5">Sexta</option>
                 <option value="9">Mensal</option>
               </select>
             </div>
+
+            <div className="apm-group third">
+              <label>Minutos por execução</label>
+              <input type="number" name="tt_min_exec" value={form.tt_min_exec} onChange={handleChange} />
+            </div>
+
+            <div className="apm-group third">
+              <label>Total de execuções por semana</label>
+              <input type="number" name="tt_exec_semana" value={form.tt_exec_semana} onChange={handleChange} />
+            </div>
+
+            <div className="apm-group third">
+              <label>Quantidade de semanas por mês</label>
+              <input type="number" name="tt_semana" value={form.tt_semana} onChange={handleChange} />
+            </div>
+
           </div>
 
-          <div className="modal-buttons">
-            <button className="btn-cancel" onClick={onClose}>Cancelar</button>
-            <button type="submit" className="btn-save">Salvar</button>
+          {/* FOOTER */}
+          <div className="apm-footer">
+            <button type="button" className="apm-btn-cancel" onClick={onClose}>
+              Cancelar
+            </button>
+            <button type="submit" className="apm-btn-save">
+              Salvar
+            </button>
           </div>
         </form>
+
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./SchedulerInfoModal.css";
 import { API_BASE_URL } from "../../config/api";
 
 function SchedulerInfoModal({ robot, onClose }) {
