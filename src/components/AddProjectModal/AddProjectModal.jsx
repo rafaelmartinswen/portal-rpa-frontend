@@ -87,24 +87,24 @@ function AddProjectModal({ onClose, ambiente }) {
 
             <div className="apm-group full">
               <label>Descrição</label>
-              <textarea name="Descricao" rows={3} value={form.Descricao} onChange={handleChange} />
+              <textarea name="Descricao" rows={3} value={form.Descricao} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group full">
               <label>Objetivo</label>
-              <textarea name="Objetivo" rows={3} value={form.Objetivo} onChange={handleChange} />
+              <textarea name="Objetivo" rows={3} value={form.Objetivo} onChange={handleChange} required/>
             </div>
 
             <h3 className="apm-section">Responsáveis</h3>
 
             <div className="apm-group third">
               <label>Key User</label>
-              <input name="Key_User" value={form.Key_User} onChange={handleChange} />
+              <input name="Key_User" value={form.Key_User} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group third">
               <label>Dev. Responsável</label>
-              <select name="DevResp" value={form.DevResp} onChange={handleChange}>
+              <select name="DevResp" value={form.DevResp} onChange={handleChange} required>
                 <option value="">Selecione...</option>
                 <option value="Vitor">Vitor</option>
                 <option value="Danilo">Danilo</option>
@@ -112,8 +112,22 @@ function AddProjectModal({ onClose, ambiente }) {
             </div>
 
             <div className="apm-group third">
+              <label>Área responsável</label>
+              <select name="AreaResponsavel" value={form.AreaResponsavel} onChange={handleChange} required>
+                <option value="">Selecione...</option>
+                <option value="Financeiro">Financeiro</option>
+                <option value="Fiscal">Fiscal</option>
+                <option value="Fiscal 2">Fiscal 2</option>
+                <option value="Folha">Folha</option>
+                <option value="GRSA">GRSA</option>
+                <option value="Juridico">Juridico</option>
+                <option value="Juridico Regional">Juridico Regional</option>
+              </select>
+            </div>
+
+            <div className="apm-group third">
               <label>Diretor</label>
-              <select name="Diretor" value={form.Diretor} onChange={handleChange}>
+              <select name="Diretor" value={form.Diretor} onChange={handleChange} required>
                 <option value="">Selecione...</option>
                 <option value="Cassiano">Cassiano</option>
                 <option value="Rodrigo">Rodrigo</option>
@@ -124,24 +138,24 @@ function AddProjectModal({ onClose, ambiente }) {
 
             <div className="apm-group full">
               <label>Sistemas Utilizados</label>
-              <textarea name="Sistemas_Utilizados" rows={2} value={form.Sistemas_Utilizados} onChange={handleChange} />
+              <textarea name="Sistemas_Utilizados" rows={2} value={form.Sistemas_Utilizados} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group full">
               <label>Tecnologias Utilizadas</label>
-              <textarea name="Tecnologias_Utilizadas" rows={2} value={form.Tecnologias_Utilizadas} onChange={handleChange} />
+              <textarea name="Tecnologias_Utilizadas" rows={2} value={form.Tecnologias_Utilizadas} onChange={handleChange} required/>
             </div>
 
             <h3 className="apm-section">Agenda</h3>
 
             <div className="apm-group third">
               <label>Data de Criação</label>
-              <input type="date" name="Data_Criacao" value={form.Data_Criacao} onChange={handleChange} />
+              <input type="date" name="Data_Criacao" value={form.Data_Criacao} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group third">
               <label>Agenda</label>
-              <select name="Agenda" value={form.Agenda} onChange={handleChange}>
+              <select name="Agenda" value={form.Agenda} onChange={handleChange} required>
                 <option value="">Selecione...</option>
                 <option value="1">Segunda</option>
                 <option value="2">Terça</option>
@@ -154,17 +168,17 @@ function AddProjectModal({ onClose, ambiente }) {
 
             <div className="apm-group third">
               <label>Minutos por execução</label>
-              <input type="number" name="tt_min_exec" value={form.tt_min_exec} onChange={handleChange} />
+              <input type="number" name="tt_min_exec" value={form.tt_min_exec} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group third">
               <label>Total de execuções por semana</label>
-              <input type="number" name="tt_exec_semana" value={form.tt_exec_semana} onChange={handleChange} />
+              <input type="number" name="tt_exec_semana" value={form.tt_exec_semana} onChange={handleChange} required/>
             </div>
 
             <div className="apm-group third">
               <label>Quantidade de semanas por mês</label>
-              <input type="number" name="tt_semana" value={form.tt_semana} onChange={handleChange} />
+              <input type="number" name="tt_semana" value={form.tt_semana} onChange={handleChange} required/>
             </div>
 
           </div>
