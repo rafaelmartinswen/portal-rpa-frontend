@@ -245,4 +245,3 @@ function Production( {user, onTabChange} ) {
 }
 
 export default Production;
-
