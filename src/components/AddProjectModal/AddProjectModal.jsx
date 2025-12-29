@@ -31,6 +31,9 @@ function AddProjectModal({ onClose, ambiente }) {
     { value: "5", label: "Sexta" },
     { value: "6", label: "Sábado" },
     { value: "7", label: "Domingo" },
+    { value: "8", label: "Diário" },
+    { value: "9", label: "Quinzenal" },
+    { value: "10", label: "Mensal" },
   ];
 
   const handleChange = (e) => {
@@ -207,6 +210,7 @@ function AddProjectModal({ onClose, ambiente }) {
               <label>Periodicidade</label>
               <select name="tt_semana" value={form.tt_semana} onChange={handleChange} required>
                 <option value="">Selecione...</option>
+                <option value="Diario">Diário</option>
                 <option value="Semanal">Semanal</option>
                 <option value="Quinzenal">Quinzenal</option>
                 <option value="Mensal">Mensal</option>
