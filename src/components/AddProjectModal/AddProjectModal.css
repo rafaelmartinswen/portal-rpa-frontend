@@ -104,6 +104,31 @@
   resize: vertical;
 }
 
+.apm-agenda-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d6d6d6;
+  background: #fafafa;
+}
+
+.apm-agenda-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+
+.apm-agenda-option input {
+  width: 16px;
+  height: 16px;
+  accent-color: #F47C48;
+}
+
 .apm-group input:focus,
 .apm-group select:focus,
 .apm-group textarea:focus {
@@ -238,6 +263,11 @@
   .apm-group textarea {
     font-size: 16px; /* evita zoom no iOS */
     padding: 12px 14px;
+  }
+
+  .apm-agenda-options {
+    grid-template-columns: 1fr 1fr;
+    padding: 10px 12px;
   }
 
   .apm-header h2 {

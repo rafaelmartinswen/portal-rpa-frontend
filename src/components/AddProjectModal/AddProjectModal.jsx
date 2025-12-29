@@ -19,13 +19,31 @@ function AddProjectModal({ onClose, ambiente }) {
     Qtd_Robos: "1", 
     Agenda: "",
     tt_min_exec: "",
-    tt_exec_semana: "",
     tt_semana: "",
     Ambiente: ambiente
   });
 
+  const agendaOptions = [
+    { value: "1", label: "Segunda" },
+    { value: "2", label: "Terça" },
+    { value: "3", label: "Quarta" },
+    { value: "4", label: "Quinta" },
+    { value: "5", label: "Sexta" },
+    { value: "6", label: "Sábado" },
+    { value: "7", label: "Domingo" },
+  ];
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleAgendaChange = (e) => {
+    const { value, checked } = e.target;
+    const current = form.Agenda ? form.Agenda.split(",") : [];
+    const next = checked
+      ? [...current, value]
+      : current.filter((item) => item !== value);
+    setForm({ ...form, Agenda: next.join(",") });
   };
 
   // ------ SALVAR NO BACKEND ------
@@ -159,15 +177,25 @@ function AddProjectModal({ onClose, ambiente }) {
 
             <div className="apm-group third">
               <label>Agenda</label>
-              <select name="Agenda" value={form.Agenda} onChange={handleChange} required>
-                <option value="">Selecione...</option>
-                <option value="1">Segunda</option>
-                <option value="2">Terça</option>
-                <option value="3">Quarta</option>
-                <option value="4">Quinta</option>
-                <option value="5">Sexta</option>
-                <option value="9">Mensal</option>
-              </select>
+              <div className="apm-agenda-options">
+                {agendaOptions.map((option) => {
+                  const checked = form.Agenda
+                    ? form.Agenda.split(",").includes(option.value)
+                    : false;
+                  return (
+                    <label className="apm-agenda-option" key={option.value}>
+                      <input
+                        type="checkbox"
+                        value={option.value}
+                        checked={checked}
+                        onChange={handleAgendaChange}
+                      />
+                      <span>{option.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              <input type="hidden" name="Agenda" value={form.Agenda} required />
             </div>
 
             <div className="apm-group third">
@@ -176,13 +204,13 @@ function AddProjectModal({ onClose, ambiente }) {
             </div>
 
             <div className="apm-group third">
-              <label>Total de execuções por semana</label>
-              <input type="number" name="tt_exec_semana" value={form.tt_exec_semana} onChange={handleChange} required/>
-            </div>
-
-            <div className="apm-group third">
-              <label>Quantidade de semanas por mês</label>
-              <input type="number" name="tt_semana" value={form.tt_semana} onChange={handleChange} required/>
+              <label>Periodicidade</label>
+              <select name="tt_semana" value={form.tt_semana} onChange={handleChange} required>
+                <option value="">Selecione...</option>
+                <option value="Semanal">Semanal</option>
+                <option value="Quinzenal">Quinzenal</option>
+                <option value="Mensal">Mensal</option>
+              </select>
             </div>
 
           </div>
