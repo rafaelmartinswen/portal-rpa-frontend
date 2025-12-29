@@ -170,10 +170,12 @@ function Production( {user, onTabChange} ) {
               </option>
             ))}
           </select>
-
-          <div className="filters">
-            <button className="filter active" onClick={() => setIsAddOpen(true)}>Adicionar</button>
-          </div>
+          
+          {user.role === 'Administrador' && (
+            <div className="filters">
+              <button className="filter active" onClick={() => setIsAddOpen(true)}>Adicionar</button>
+            </div>
+          )}
         </div>
       </div>
 
