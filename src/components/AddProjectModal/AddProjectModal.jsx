@@ -136,7 +136,6 @@ function AddProjectModal({ onClose, ambiente }) {
                 <option value="">Selecione...</option>
                 <option value="Financeiro">Financeiro</option>
                 <option value="Fiscal">Fiscal</option>
-                <option value="Fiscal 2">Fiscal 2</option>
                 <option value="Folha">Folha</option>
                 <option value="GRSA">GRSA</option>
                 <option value="Juridico">Juridico</option>

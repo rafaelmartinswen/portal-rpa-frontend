@@ -20,7 +20,7 @@ function RobotInfoModal({ robot, onClose }) {
         </InfoGroup>
 
         <InfoGroup>
-          <InfoField label="Ambiente" value={robot.Ambiente} />
+          <InfoField label="Key User" value={robot.Key_User} />
           <InfoField label="Sigla DB" value={robot.Sigla_DB} />
         </InfoGroup>
 

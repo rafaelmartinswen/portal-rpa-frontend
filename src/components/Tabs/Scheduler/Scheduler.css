@@ -1,66 +1,91 @@
 .scheduler {
-  width: 90%;
-  /* height: 100dvh; */
+  width: 100%;
   margin: 0 auto;
   align-items: center;
 }
 
-.toggle {
-  position: relative;
-  width: 120px;
-  height: 40px;
-  display: inline-block;
-  cursor: pointer;
-  font-family: sans-serif;
+.scheduler-table-scroll {
+  max-width: 100%;
+  overflow: auto;
+  border: 1px solid #e6ebf2;
+  border-radius: 12px;
+  max-height: 440px; /* Altura máxima do card */
+  overflow-y: auto; /* Necessário para fixar o thead */
+  background: #ffffff;
 }
 
-.toggle input {
-  display: none;
+.scheduler-table-grid {
+  width: max-content;
+  min-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.slider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #ccc;
-  border-radius: 40px;
-  transition: background 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  font-size: 13px;
-  color: #444;
-}
-
-.slider .on,
-.slider .off {
-  width: 50%;
+.scheduler-table-grid th,
+.scheduler-table-grid td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eef1f6;
+  border-right: 1px solid #eef1f6;
+  font-size: 14px;
+  color: #2b3440;
+  white-space: nowrap;
   text-align: center;
-  pointer-events: none;
 }
 
-.slider::before {
-  content: "";
-  position: absolute;
-  width: 48%;
-  height: 34px;
-  background: white;
-  border-radius: 40px;
-  top: 3px;
-  left: 3px;
-  transition: transform 0.3s ease;
+.scheduler-table-grid th {
+  background: #f6f8fb;
+  font-weight: 600;
+  text-align: center;
+  position: sticky;
+  top: 0;
   z-index: 1;
 }
 
-/* Quando ativado */
-input:checked + .slider {
-  background: #F47C48;
-  color: white;
+.scheduler-table-grid th:last-child,
+.scheduler-table-grid td:last-child {
+  border-right: none;
 }
 
-input:checked + .slider::before {
-  transform: translateX(57px);
+.scheduler-table-grid tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.scheduler-table-grid tbody tr:hover {
+  background-color: #fafafa;
+}
+
+.scheduler-table-grid .sticky-col {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  text-align: left;
+  min-width: 260px;
+  background: #ffffff;
+  box-shadow: 1px 0 0 #eef1f6;
+}
+
+.scheduler-table-grid th.sticky-col {
+  z-index: 4;
+  background: #f6f8fb;
+}
+
+.project-cell {
+  padding: 12px 18px;
+}
+
+.project-title {
+  font-weight: 600;
+  color: #222c38;
+}
+
+.project-desc {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #667085;
+}
+
+.scheduler-empty {
+  text-align: center;
+  padding: 24px;
+  color: #7b8794;
 }
