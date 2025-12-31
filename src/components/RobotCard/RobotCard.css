@@ -5,6 +5,13 @@
   margin-top: 16px;
 }
 
+.robot-cards-container.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+
 .robot-card {
   /* background: #1E2A36; */
   border-radius: 12px;

@@ -18,6 +18,7 @@ function Production( {user, onTabChange} ) {
   const [selectedPage, setSelectedPage] = useState(null);
   const [selectedID, setSelectedID] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
+  const [selectedKeyUser, setSelectedKeyUser] = useState("");
     
   useEffect(() => {
     fetch(`${API_BASE_URL}/robots`)
@@ -93,19 +94,31 @@ function Production( {user, onTabChange} ) {
         index === self.findIndex((r) => r.Nome === robot.Nome) // remove duplicados
   );
 
-  const filteredRobots = robotsUnique.filter(
-    (robot) =>
-      (robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
-        robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
-        robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase())) &&
-      (selectedArea === "" || robot.Area_Responsavel === selectedArea)
-  );
+  const filteredRobots = robotsUnique.filter((robot) => {
+    const matchesSearch =
+      robot.Nome.toLowerCase().includes(search.toLowerCase()) ||
+      robot.Sigla_DB?.toLowerCase().includes(search.toLowerCase()) ||
+      robot.Area_Responsavel?.toLowerCase().includes(search.toLowerCase());
+
+    const matchesArea = selectedArea === "" || robot.Area_Responsavel === selectedArea;
+    const matchesKeyUser = selectedKeyUser === "" || robot.Key_User === selectedKeyUser;
+
+    return matchesSearch && matchesArea && matchesKeyUser;
+  });
 
   const areaOptions = Array.from(
     new Set(
       robotsUnique
         .map((robot) => robot.Area_Responsavel)
         .filter((area) => area && area.trim() !== "")
+    )
+  ).sort();
+
+  const keyuserOptions = Array.from(
+    new Set(
+      robotsUnique
+        .map((robot) => robot.Key_User)
+        .filter((keyUser) => keyUser && keyUser.trim() !== "")
     )
   ).sort();
 
@@ -170,6 +183,19 @@ function Production( {user, onTabChange} ) {
               </option>
             ))}
           </select>
+
+          <select
+            className="select"
+            value={selectedKeyUser}
+            onChange={(e) => setSelectedKeyUser(e.target.value)}
+          >
+            <option value="">Todos os Key Users</option>
+            {keyuserOptions.map((keyUser) => (
+              <option key={keyUser} value={keyUser}>
+                {keyUser}
+              </option>
+            ))}
+          </select>
           
           {user.role === 'Administrador' && (
             <div className="filters">
@@ -179,7 +205,7 @@ function Production( {user, onTabChange} ) {
         </div>
       </div>
 
-      <div className="robot-cards-container">
+      <div className={`robot-cards-container${filteredRobots.length === 0 ? " is-empty" : ""}`}>
         {filteredRobots.length > 0 ? (
           filteredRobots.map((robot) => (
             <RobotCard 
