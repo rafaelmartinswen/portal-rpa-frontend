@@ -51,6 +51,8 @@ function DashboardHeader({ user }) {
         return <Management />;
       case "projectManagement":
         return <ProjectManagement />;
+      case "projectHistory":
+        return <ProjectHistory user={user}/>;
       default:
         return <SpecificProject project={activeTab} />;
     }

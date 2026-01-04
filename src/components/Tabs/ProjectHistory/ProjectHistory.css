@@ -1,0 +1,36 @@
+.projecthistory {
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.tab-list-projects-history {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.tab-list-projects-history th,
+.tab-list-projects-history td {
+  padding: 0.75rem;
+  text-align: left;
+  font-size: 0.875rem; /* 14px */
+  color: #6b7280; /* Cinza */
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.tab-list-projects-history thead th {
+  top: 0;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: #f9fafb;
+}
+
+.tab-list-projects-history tbody tr:hover {
+  background-color: #f3f4f6;
+}
+

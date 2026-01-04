@@ -141,7 +141,7 @@ function Production( {user, onTabChange} ) {
 
           <div className="stat-card">
             <span className="stat-title">Histórico</span>
-            <button>Acessar</button>
+            <button onClick={() => onTabChange("projectHistory")}>Acessar</button>
           </div>
 
           <div className="stat-card highlight">
