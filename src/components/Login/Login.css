@@ -100,9 +100,9 @@
 
 /* -------- */
 .extra-img-natal img {
-  width: 120px;
-  margin-top: -40px;
-  margin-left: -50px;
+  width: 100px;
+  margin-top: -50px;
+  margin-left: -22px;
   position:fixed;
   pointer-events: none;      /* não permite clique */
   user-select: none;         /* não permite selecionar */

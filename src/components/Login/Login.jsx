@@ -46,7 +46,7 @@ function Login({ onLogin }) {
   return (
     <div className="login-container"> 
       <div className="extra-img-natal">
-        <img src="/images/pngtree-christmas-removebg.png" alt="robot" />
+        <img src="/images/robot_initial.png" alt="robot" />
       </div>
       <div className="top-login-container">
         <h2>GPS</h2>
@@ -88,7 +88,7 @@ function Login({ onLogin }) {
           <button type="submit">Entrar</button>
 
           <div className="bot-login-card">
-            <p>Não possui conta? Cadastre-se <span>aqui!</span></p>
+            <p>Não possui conta? Solicite acesso <span>aqui!</span></p>
           </div>
         </form>
         <img src="/images/robot_rpa.png" alt="robot" />
