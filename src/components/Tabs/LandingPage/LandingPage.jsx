@@ -77,16 +77,7 @@ function LandingPage({ user, onTabChange }) {
                     <p>Gerencie e monitore todos os robôs configurados.</p>
                 </div>
 
-                <div
-                    className="card"
-                    onClick={() => {
-                        if (user?.role === "Administrador") {
-                            onTabChange("scheduler");
-                        } else {
-                            handleAction("Agendamentos")
-                        }
-                    }}
-                >
+                <div className="card" onClick={() => onTabChange("scheduler")}>
                     <div className="icon-area yellow">
                         <FiClock />
                     </div>

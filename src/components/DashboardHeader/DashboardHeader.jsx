@@ -22,7 +22,7 @@ function DashboardHeader({ user }) {
       "projects",
       "management"
     ],
-    Usuario: ["landingpage","projects"] // Depois vamos alterar para apenas pessoas da area específica...
+    Usuario: ["landingpage","projects","scheduler"] // Depois vamos alterar para apenas pessoas da area específica...
   };
 
   // Pegando o role e abas permitidas
@@ -46,7 +46,7 @@ function DashboardHeader({ user }) {
       case "development":
         return <Development user={user} onTabChange={setActiveTab}/>;
       case "scheduler":
-        return <Scheduler />;
+        return <Scheduler user={user}/>;
       case "management":
         return <Management />;
       case "projectManagement":

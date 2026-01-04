@@ -4,6 +4,93 @@
   align-items: center;
 }
 
+.scheduler-chart {
+  width: 100%;
+}
+
+.scheduler-chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2b3440;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.scheduler-chart-total {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2b3440;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.scheduler-chart-canvas {
+  width: 100%;
+  position: relative;
+}
+
+.scheduler-chart-canvas-total {
+  height: 180px;
+}
+
+.scheduler-chart-canvas-daily {
+  height: 240px;
+}
+
+.scheduler-chart-canvas canvas {
+  position: absolute !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.scheduler-chart-empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #7b8794;
+  font-size: 13px;
+}
+
+.ov-chart {
+  margin-bottom: 18px;
+  background: #fff;
+  padding: 22px;
+  border-radius: 10px;
+  border-bottom: 8px solid #2D3E50;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.ov-chart-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.ov-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.ov-chart-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.date-input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.chart-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
 .scheduler-table-scroll {
   max-width: 100%;
   overflow: auto;
@@ -88,4 +175,29 @@
   text-align: center;
   padding: 24px;
   color: #7b8794;
+}
+
+@media (max-width: 720px) {
+  .chart-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .chart-container > div {
+    width: 100%;
+  }
+
+  .ov-chart-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .ov-chart-filters {
+    width: 100%;
+  }
+
+  .date-input {
+    width: 100%;
+  }
 }

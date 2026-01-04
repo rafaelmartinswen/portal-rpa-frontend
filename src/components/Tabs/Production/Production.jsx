@@ -136,7 +136,7 @@ function Production( {user, onTabChange} ) {
         <div className="top-management-stats">
           <div className="stat-card">
             <span className="stat-title">Agendamentos</span>
-            <button>Acessar</button>
+            <button onClick={() => onTabChange("scheduler")}>Acessar</button>
           </div>
 
           <div className="stat-card">
