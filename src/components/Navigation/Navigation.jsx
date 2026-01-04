@@ -58,6 +58,11 @@ export default function Navigation({ activeTab, onTabChange, allowedTabs, user }
     <nav className="navigation" aria-label="Menu principal">
       <div className="nav-container">
 
+        {/* LOGO GPS */}
+        <div className="nav-logo">
+          <img src="/images/logo_branco.png" alt="Logo" />
+        </div>
+
         {/* BUSCA */}
         <div className="nav-search">
           <FaSearch className="search-icon" aria-hidden="true" />
