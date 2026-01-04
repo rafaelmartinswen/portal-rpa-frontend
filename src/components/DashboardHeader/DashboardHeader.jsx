@@ -6,6 +6,7 @@ import Development from "../Tabs/Development/Development";
 import Scheduler from "../Tabs/Scheduler/Scheduler";
 import Management from "../Tabs/Management/Management";
 import ProjectManagement from "../Tabs/ProjectManagement/ProjectManagement";
+import ProjectHistory from "../Tabs/ProjectHistory/ProjectHistory";
 import SpecificProject from "../Tabs/SpecificProject/SpecificProject";
 
 function DashboardHeader({ user }) {
