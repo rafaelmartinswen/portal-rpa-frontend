@@ -9,7 +9,7 @@ function Management() {
 
   const menuItems = [
     "Visão Geral",
-    "Recursos",
+    // "Recursos",
     "VMs",
     "Usuários"
   ];
@@ -66,7 +66,7 @@ function Management() {
         {/* ÁREA QUE MUDA DINAMICAMENTE */}
         <div className="management-content">
           {selected === "Visão Geral" && <Overview />}
-          {selected === "Recursos" && <p>Gerenciamento de recursos disponíveis...</p>}
+          {/* {selected === "Recursos" && <p>Gerenciamento de recursos disponíveis...</p>} */}
           {selected === "VMs" && <VirtualMachines />}
           {selected === "Usuários" && <Users />}
         </div>
