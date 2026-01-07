@@ -124,6 +124,12 @@ function ProjectHistory({user}) {
                             <th>Cod. Status</th>
                             <th style={{ width: "15%" }}>Data Processo</th>
                             <th>VM</th>
+                            {(user.role === 'Administrador' || user.area_resp === 'Folha') && (
+                                <th>API Atualiz.</th>
+                            )}
+                            {(user.role === 'Administrador' || user.area_resp === 'Folha') && (
+                                <th>API Sincron.</th>
+                            )}
                         </tr>
                     </thead>
                     <tbody>
@@ -159,6 +165,12 @@ function ProjectHistory({user}) {
                             <td>{item.Status_Processo}</td>
                             <td>{new Date(item.Data_Processo).toLocaleString("pt-BR")}</td>
                             <td>{item.VM}</td>
+                            {(user.role === 'Administrador' || user.area_resp === 'Folha') && (
+                                <td>{item.Retorno_Portal}</td>
+                            )}
+                            {(user.role === 'Administrador' || user.area_resp === 'Folha') && (
+                                <td>{item.Retorno_Sincronizar}</td>
+                            )}
                         </tr>
                     ))}
                     </tbody>

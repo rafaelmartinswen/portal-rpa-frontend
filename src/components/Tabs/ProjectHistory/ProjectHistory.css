@@ -34,3 +34,55 @@
   background-color: #f3f4f6;
 }
 
+.projecthistory .topbar .right {
+  flex-wrap: wrap;
+}
+
+.projecthistory .topbar .apm-group {
+  display: flex;
+}
+
+.projecthistory .topbar .apm-group input {
+  min-width: 160px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.projecthistory .topbar .filters {
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .projecthistory .topbar .right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .topbar .select,
+  .topbar .apm-group,
+  .topbar .filters,
+  .topbar .button-qtd-vms {
+    width: 100%;
+  }
+
+  .topbar .apm-group input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar .filters {
+    display: block;
+    justify-content: center;
+  }
+
+  .topbar .filter {
+    width: 100%;
+  }
+
+  .topbar .button-qtd-vms {
+    height: 36px;
+  }
+}
+
