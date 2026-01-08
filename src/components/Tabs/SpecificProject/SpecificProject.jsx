@@ -11,6 +11,8 @@ function SpecificProject({ project }) {
     const [logInconsistencias, setLogInconsistencias] = useState([]);
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [searchPending, setSearchPending] = useState("");
+    const [searchProcessed, setSearchProcessed] = useState("");
 
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];
@@ -56,6 +58,22 @@ function SpecificProject({ project }) {
         return () => clearInterval(interval);
     }, [project, fetchData]);
 
+    const normalizeSearch = (value) => (value ?? "").toString().toLowerCase();
+    const makeMatchesSearch = (searchValue) => {
+        const searchNormalized = normalizeSearch(searchValue);
+        if (!searchNormalized) return () => true;
+        return (item) => {
+            const name = item.Nome_Empresa || item.Colaborador || item.Nome || "";
+            const extra = item.Nome_ArqPDF || (item.Empresa ? `${item.Empresa}${item.Filial ? `-${item.Filial}` : ""}` : "");
+            const id = item.Cnpj_Empresa || item.Matricula || "";
+            const haystack = `${name} ${extra} ${id}`;
+            return normalizeSearch(haystack).includes(searchNormalized);
+        };
+    };
+
+    const matchesSearchPending = makeMatchesSearch(searchPending);
+    const matchesSearchProcessed = makeMatchesSearch(searchProcessed);
+
     const logExecToday = logExec.filter((item) => {
         const date = new Date(item.Data_Processo);
 
@@ -70,9 +88,12 @@ function SpecificProject({ project }) {
             .split("/")
             .reverse()
             .join("-");
-
+        
         return itemDateLocal === todayLocal;
     });
+
+    const logExecTodayFiltered = logExecToday.filter(matchesSearchProcessed);
+    const listaInicialFiltered = listaInicial.filter(matchesSearchPending);
 
     const logInconsistenciasToday = logInconsistencias.filter((item) => {
         const date = new Date(item.Data_Processo);
@@ -152,8 +173,8 @@ function SpecificProject({ project }) {
             <div className="topo-specificproject">
                 <button 
                     onClick={() => {
-                        if (logExecToday.length > 0) {
-                        gerarExcel(logExecToday);
+                        if (logExecTodayFiltered.length > 0) {
+                        gerarExcel(logExecTodayFiltered);
                         }else {
                             alert('Nenhum resultado encontrado!')
                         }
@@ -225,12 +246,12 @@ function SpecificProject({ project }) {
             </div>
 
             {/* Tabelas */}
-            <SchedulerCard title="Fila de processamento" qtd={listaInicial.length}>
-                <PendingTable listaInicial={listaInicial} />
+            <SchedulerCard title="Fila de processamento" qtd={listaInicialFiltered.length} search={searchPending} setSearch={setSearchPending}>
+                <PendingTable listaInicial={listaInicialFiltered} />
             </SchedulerCard>
 
-            <SchedulerCard title="Processados hoje" qtd={logExecToday.length}>
-                <ProcessedTable logExec={logExecToday} project={project}/>
+            <SchedulerCard title="Processados hoje" qtd={logExecTodayFiltered.length} search={searchProcessed} setSearch={setSearchProcessed}>
+                <ProcessedTable logExec={logExecTodayFiltered} project={project}/>
             </SchedulerCard>
         </div>
     );
@@ -241,12 +262,31 @@ export default SpecificProject;
  * COMPONENTES EXTRA
  * ---------------------------------------------- */
 
-function SchedulerCard({ title, children, qtd }) {
+function SchedulerCard({ title, children, qtd, search, setSearch }) {
     return (
         <div className="scheduler-card">
             <div className="scheduler-card-header">
                 <h3>{title}</h3>
                 <button>{qtd}</button>
+            </div>
+            <div className="topbar" style={{border: "none"}}>
+                <div className="left">
+                    <button className="icon-btn">
+                        ☰
+                    </button>
+
+                    <button className="icon-btn grid">
+                        ⬚⬚
+                    </button>
+
+                    <input
+                        type="text"
+                        className="search"
+                        placeholder="Buscar por nome, sigla ou área..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
             </div>
             <div className="scheduler-card-body">{children}</div>
         </div>
