@@ -11,19 +11,19 @@ function LandingPage({ user, onTabChange }) {
     const [alerts, setAlerts] = useState([]);
     const [openAlert, setOpenAlert] = useState(false);
     const [selectedPage, setSelectedPage] = useState(null);
-    
+
     useEffect(() => {
         updateRobotsList();
         updateAlerts();
-      }, []);
-    
+    }, []);
+
     const updateRobotsList = async () => {
         try {
             const res = await fetch(`${API_BASE_URL}/robots`);
             const data = await res.json();
             setRobots(data);
         } catch (error) {
-            console.error("Erro ao buscar robôs:", error);
+            console.error("Erro ao buscar robos:", error);
         }
     };
 
@@ -35,46 +35,94 @@ function LandingPage({ user, onTabChange }) {
         } catch (error) {
             console.error("Erro ao buscar alertas:", error);
         }
-    }
+    };
 
     function handleAction(page) {
         setSelectedPage(page);
         setOpenAlert(true);
     }
 
-    const filteredAlerts = alerts.filter(alert => ( user.role !== 'Administrador' ? alert.Area_Responsavel === user.area_resp : true ))
+    const filteredAlerts = alerts.filter(alert => (
+        user.role !== "Administrador" ? alert.Area_Responsavel === user.area_resp : true
+    ));
 
-    const robotsList = robots
+    const filteredRobots = robots
         .filter(robot => robot.Ambiente === "Prod")
         .filter(robot => (
-        user.role !== 'Administrador' 
-            ? robot.Area_Responsavel === user.area_resp
-            : true
+            user.role !== "Administrador"
+                ? robot.Area_Responsavel === user.area_resp
+                : true
         ))
-        .filter((robot, index, self) =>
-            index === self.findIndex(r => r.Nome === robot.Nome)
-        )
+        .filter((robot, index, self) => index === self.findIndex(r => r.Nome === robot.Nome));
+
+    const robotsList = [...filteredRobots]
         .sort((a, b) => new Date(b.Ultima_Exec) - new Date(a.Ultima_Exec))
         .slice(0, 3);
-    
+
+    const lastExecRobot = [...filteredRobots]
+        .sort((a, b) => new Date(b.Ultima_Exec) - new Date(a.Ultima_Exec))[0];
+
+    const lastExecLabels = lastExecRobot ? formatExecution(lastExecRobot.Ultima_Exec) : null;
+
     return (
         <div className="dashboard-home">
+            <div className="lp-hero">
+                <div className="lp-hero-content">
+                    <div className="lp-pill">Painel RPA</div>
+                    <h2>Ola, {user?.name?.split(" ")[0]}.</h2>
+                    <p>
+                        Centralize suas automações, acompanhe execuções e tome decisão rápida
+                        com dados em tempo real.
+                    </p>
+                    <div className="lp-hero-actions">
+                        <button className="lp-btn primary" onClick={() => onTabChange("production")}>
+                            Ver robos
+                        </button>
+                        <button className="lp-btn ghost" onClick={() => onTabChange("scheduler")}>
+                            Agendamentos
+                        </button>
+                    </div>
+                </div>
 
-            {/* Saudação */}
-            <div className="welcome-box">
-                <h2>Olá, {user?.name?.split(" ")[0]} 👋</h2>
-                <p>Bem-vindo(a) ao painel de automações RPA.</p>
-                <p className="sub">Gerencie seus robôs, acompanhe execuções e visualize resultados em tempo real.</p>
+                <div className="lp-hero-metrics">
+                    <div className="metric-card">
+                        <div className="metric-label">Robôs em produção</div>
+                        <div className="metric-value">{filteredRobots.length}</div>
+                        <div className="metric-sub">Ambiente Prod</div>
+                    </div>
+                    <div className={`metric-card ${filteredAlerts.length ? "warning" : "ok"}`}>
+                        <div className="metric-label">Alertas ativos</div>
+                        <div className={`metric-value ${filteredAlerts.length ? "alert-danger" : "alert-ok"}`}>
+                            {filteredAlerts.length}
+                        </div>
+                        <div className="metric-sub">
+                            {filteredAlerts.length ? "Requer atencao" : "Tudo sob controle"}
+                        </div>
+                    </div>
+                    <div className="metric-card">
+                        <div className="metric-label">Ultima execução</div>
+                        <div className="metric-value">
+                            {lastExecLabels ? lastExecLabels.timeLabel : "--:--"}
+                        </div>
+                        <div className="metric-sub">
+                            {lastExecLabels ? `Executado ${lastExecLabels.dayLabel}` : "Sem historico"}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            {/* Cards principais */}
+            <div className="section-head">
+                <h3>Acesso rapido</h3>
+                <span className="section-note">Atalhos para as ações mais usadas</span>
+            </div>
+
             <div className="quick-cards">
                 <div className="card" onClick={() => onTabChange("production")}>
                     <div className="icon-area blue">
                         <RiRobot3Fill />
                     </div>
                     <h3>Robôs Ativos</h3>
-                    <p>Gerencie e monitore todos os robôs configurados.</p>
+                    <p>Gerencie e monitore todos os robos configurados.</p>
                 </div>
 
                 <div className="card" onClick={() => onTabChange("scheduler")}>
@@ -82,16 +130,16 @@ function LandingPage({ user, onTabChange }) {
                         <FiClock />
                     </div>
                     <h3>Agendamentos</h3>
-                    <p>Controle horários e frequências de execução.</p>
+                    <p>Controle horários e frequencias de execução.</p>
                 </div>
-                
-                {user.role === 'Administrador' && (
+
+                {user.role === "Administrador" && (
                     <>
-                        <div className="card" onClick={() => handleAction("Executar robô")}>
+                        <div className="card" onClick={() => handleAction("Executar robo")}>
                             <div className="icon-area green">
                                 <FiPlayCircle />
                             </div>
-                            <h3>Executar Robô</h3>
+                            <h3>Executar Robo</h3>
                             <p>Inicie execuções sob demanda com segurança.</p>
                         </div>
 
@@ -100,56 +148,67 @@ function LandingPage({ user, onTabChange }) {
                                 <IoAlertSharp />
                             </div>
                             <h3>Oportunidades</h3>
-                            <p>Verifique o log de oportunidades</p>
+                            <p>Verifique o log de oportunidades.</p>
                         </div>
                     </>
                 )}
             </div>
 
-            {/* Alertas de projetos */}
-            <div className="section-title">
-                <h3>Alertas de Execução</h3>
+            <div className="section-head">
+                <h3>Alertas de execução</h3>
+                <span className={`section-chip ${filteredAlerts.length ? "danger" : "ok"}`}>
+                    {filteredAlerts.length ? `${filteredAlerts.length} ativos` : "Sem alertas"}
+                </span>
             </div>
-            {filteredAlerts.length > 0 ?
+            {filteredAlerts.length > 0 ? (
                 filteredAlerts.map((alert) => (
                     <div key={alert.Id}>
-                        {alert.Tipo_Alerta === 'stopped' ? (
+                        {alert.Tipo_Alerta === "stopped" ? (
                             <OvAlertStopped alert={alert} />
                         ) : (
                             <OvAlertFailed alert={alert} />
                         )}
                     </div>
-                )) : <div className="ov-alert ov-alert-warning-green" style={{ fontWeight: 500, fontSize: '14px' }}>
-                    ✔ Nenhum projeto em estado de alerta!
-                </div>}
+                ))
+            ) : (
+                <div className="ov-alert ov-alert-warning-green" style={{ fontWeight: 500, fontSize: "14px" }}>
+                    Nenhum projeto em estado de alerta.
+                </div>
+            )}
 
-            {/* Últimas atividades */}
-            <div className="section-title">
-                <h3>Últimas execuções</h3>
+            <div className="section-head">
+                <h3>Ultimas execucoes</h3>
+                <span className="section-note">Visão rápida das execuções recentes</span>
             </div>
 
             <div className="activity-list">
-                {robotsList.length > 0 ? robotsList.map((robot) => {
-                    const { dayLabel, timeLabel } = formatExecution(robot.Ultima_Exec);
+                {robotsList.length > 0 ? (
+                    robotsList.map((robot) => {
+                        const { dayLabel, timeLabel } = formatExecution(robot.Ultima_Exec);
 
-                    return (
-                        <div key={robot.Id} className="activity-item">
-                            <FiActivity className="activity-icon" />
-                            <div>
-                                <strong>Robô - {robot.Nome}</strong>
-                                <p>
-                                    Executado{" "}
-                                    {dayLabel === "hoje"
-                                        ? "hoje"
-                                        : dayLabel === "ontem"
-                                        ? "ontem"
-                                        : `dia ${dayLabel}`}{" "}
-                                    às {timeLabel}
-                                </p>
+                        return (
+                            <div key={robot.Id} className="activity-item">
+                                <FiActivity className="activity-icon" />
+                                <div>
+                                    <strong>Robo - {robot.Nome}</strong>
+                                    <p>
+                                        Executado{" "}
+                                        {dayLabel === "hoje"
+                                            ? "hoje"
+                                            : dayLabel === "ontem"
+                                            ? "ontem"
+                                            : `dia ${dayLabel}`}{" "}
+                                        as {timeLabel}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    );
-                }) : null}
+                        );
+                    })
+                ) : (
+                    <div className="activity-empty">
+                        Nenhuma execução recente encontrada.
+                    </div>
+                )}
             </div>
 
             <Modal open={openAlert} onClose={() => setOpenAlert(false)}>
@@ -160,7 +219,7 @@ function LandingPage({ user, onTabChange }) {
 
                     <h2>Alerta</h2>
                     <p>
-                        A página <strong>{selectedPage}</strong> está em desenvolvimento...
+                        A pagina <strong>{selectedPage}</strong> está em desenvolvimento...
                     </p>
 
                     <div className="confirmacao-buttons">
@@ -175,7 +234,6 @@ function LandingPage({ user, onTabChange }) {
 function formatExecution(ultimaExec) {
     const date = new Date(ultimaExec);
 
-    // partes
     const day = String(date.getDate()).padStart(2, "0");
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const year = date.getFullYear();
@@ -183,7 +241,6 @@ function formatExecution(ultimaExec) {
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
 
-    // datas para comparação
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -192,7 +249,6 @@ function formatExecution(ultimaExec) {
 
     const diffDays = (today - execDay) / (1000 * 60 * 60 * 24);
 
-    // texto do dia
     let dayLabel;
 
     if (diffDays === 0) {
@@ -204,23 +260,23 @@ function formatExecution(ultimaExec) {
     }
 
     return {
-        dayLabel,               // "hoje", "ontem", "03/12/2025"
-        timeLabel: `${hours}:${minutes}`, // "22:03"
+        dayLabel,
+        timeLabel: `${hours}:${minutes}`,
     };
 }
 
 function OvAlertFailed({ alert }) {
     return (
-        <div className="ov-alert ov-alert-warning" style={{ fontWeight: 500, fontSize: '14px' }}>
-            ⚠️ Projeto {alert.Projeto} falhou durante a execução!
+        <div className="ov-alert ov-alert-warning" style={{ fontWeight: 500, fontSize: "14px" }}>
+            Projeto {alert.Projeto} falhou durante a execução.
         </div>
     );
 }
 
 function OvAlertStopped({ alert }) {
     return (
-        <div className="ov-alert ov-alert-warning-red" style={{ fontWeight: 500, fontSize: '14px' }}>
-            ❗ Projeto {alert.Projeto} parou!
+        <div className="ov-alert ov-alert-warning-red" style={{ fontWeight: 500, fontSize: "14px" }}>
+            Projeto {alert.Projeto} parou.
         </div>
     );
 }
