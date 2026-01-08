@@ -150,7 +150,6 @@ function SpecificProject({ project }) {
         <div className="specificproject">
             {/* Header */}
             <div className="topo-specificproject">
-                <h1>{(project === 'EXCALCRESCISAO' ? "Cálculo de rescisões" : project === 'EXTFGTSCXE' ? "Solicitação FGTS" : null) ?? project}</h1>
                 <button 
                     onClick={() => {
                         if (logExecToday.length > 0) {
@@ -163,16 +162,26 @@ function SpecificProject({ project }) {
                     Exportar Excel
                 </button>
             </div>
+            <div className="top-management" style={{borderTopLeftRadius: "0",borderTopRightRadius: "0"}}>
+                <div className="top-management-header">
+                    <h3>Acompanhamento de projetos</h3>
+                    <h2>{(project === 'EXCALCRESCISAO' ? "Cálculo de rescisões" : project === 'EXTFGTSCXE' ? "Solicitação FGTS" : null) ?? project}</h2>
+                </div>
 
-            {/* Insights */}
-            <div className="insights-specificproject">
-                <InsightCard title="Pendentes" value={listaInicial.length} />
-                <InsightCard title="Processados" value={logExecToday.length} />
-                <InsightCard
-                    title="Inconsistências"
-                    value={logInconsistenciasToday.length}
-                    highlight={logInconsistenciasToday.length > 0}
-                />
+                <div className="top-management-stats">
+                    <div className="stat-card highlight">
+                        <span className="stat-title">Pendentes</span>
+                        <span className="stat-value">{listaInicial.length}</span>
+                    </div>
+                    <div className="stat-card highlight">
+                        <span className="stat-title">Processados</span>
+                        <span className="stat-value">{logExecToday.length}</span>
+                    </div>
+                    <div className="stat-card highlight">
+                        <span className="stat-title">Inconsistências</span>
+                        <span className="stat-value">{logInconsistenciasToday.length}</span>
+                    </div>
+                </div>
             </div>
 
             {/* GRÁFICO */}
@@ -221,7 +230,7 @@ function SpecificProject({ project }) {
             </SchedulerCard>
 
             <SchedulerCard title="Processados hoje" qtd={logExecToday.length}>
-                <ProcessedTable logExec={logExecToday}/>
+                <ProcessedTable logExec={logExecToday} project={project}/>
             </SchedulerCard>
         </div>
     );
@@ -231,15 +240,6 @@ export default SpecificProject;
 /* ----------------------------------------------
  * COMPONENTES EXTRA
  * ---------------------------------------------- */
-
-function InsightCard({ title, value, highlight }) {
-    return (
-        <div className="item-insights">
-            <h2>{title}</h2>
-            <span className={highlight ? "text-danger" : ""}>{value}</span>
-        </div>
-    );
-}
 
 function SchedulerCard({ title, children, qtd }) {
     return (
@@ -294,7 +294,7 @@ function PendingTable({ listaInicial }) {
     );
 }
 
-function ProcessedTable({ logExec }) {
+function ProcessedTable({ logExec, project }) {
     return (
         <table>
             <thead>
@@ -305,6 +305,12 @@ function ProcessedTable({ logExec }) {
                     <th>Cod. Status</th>
                     <th style={{ width: "15%" }}>Data Processo</th>
                     <th>VM</th>
+                    {(project === 'EXCALCRESCISAO') && (
+                        <th>API Atualiz.</th>
+                    )}
+                    {(project === 'EXCALCRESCISAO') && (
+                        <th>API Sincron.</th>
+                    )}
                 </tr>
             </thead>
 
@@ -335,6 +341,12 @@ function ProcessedTable({ logExec }) {
                         <td>{item.Status_Processo}</td>
                         <td>{new Date(item.Data_Processo).toLocaleString("pt-BR")}</td>
                         <td>{item.VM}</td>
+                        {(project === 'EXCALCRESCISAO') && (
+                            <td>{item.Retorno_Portal}</td>
+                        )}
+                        {(project === 'EXCALCRESCISAO') && (
+                            <td>{item.Retorno_Sincronizar}</td>
+                        )}
                     </tr>
                 ))}
             </tbody>
