@@ -23,7 +23,7 @@ function LandingPage({ user, onTabChange }) {
             const data = await res.json();
             setRobots(data);
         } catch (error) {
-            console.error("Erro ao buscar robos:", error);
+            console.error("Erro ao buscar robôs:", error);
         }
     };
 
@@ -42,25 +42,24 @@ function LandingPage({ user, onTabChange }) {
         setOpenAlert(true);
     }
 
-    const filteredAlerts = alerts.filter(alert => (
+    const filteredAlerts = alerts.filter((alert) =>
         user.role !== "Administrador" ? alert.Area_Responsavel === user.area_resp : true
-    ));
+    );
 
     const filteredRobots = robots
-        .filter(robot => robot.Ambiente === "Prod")
-        .filter(robot => (
-            user.role !== "Administrador"
-                ? robot.Area_Responsavel === user.area_resp
-                : true
-        ))
-        .filter((robot, index, self) => index === self.findIndex(r => r.Nome === robot.Nome));
+        .filter((robot) => robot.Ambiente === "Prod")
+        .filter((robot) =>
+            user.role !== "Administrador" ? robot.Area_Responsavel === user.area_resp : true
+        )
+        .filter((robot, index, self) => index === self.findIndex((r) => r.Nome === robot.Nome));
 
     const robotsList = [...filteredRobots]
         .sort((a, b) => new Date(b.Ultima_Exec) - new Date(a.Ultima_Exec))
         .slice(0, 3);
 
-    const lastExecRobot = [...filteredRobots]
-        .sort((a, b) => new Date(b.Ultima_Exec) - new Date(a.Ultima_Exec))[0];
+    const lastExecRobot = [...filteredRobots].sort(
+        (a, b) => new Date(b.Ultima_Exec) - new Date(a.Ultima_Exec)
+    )[0];
 
     const lastExecLabels = lastExecRobot ? formatExecution(lastExecRobot.Ultima_Exec) : null;
 
@@ -69,14 +68,14 @@ function LandingPage({ user, onTabChange }) {
             <div className="lp-hero">
                 <div className="lp-hero-content">
                     <div className="lp-pill">Painel RPA</div>
-                    <h2>Ola, {user?.name?.split(" ")[0]}.</h2>
+                    <h2>Olá, {user?.name?.split(" ")[0]}.</h2>
                     <p>
-                        Centralize suas automações, acompanhe execuções e tome decisão rápida
-                        com dados em tempo real.
+                        Centralize suas automações, acompanhe execuções e tome decisão rápida com
+                        dados em tempo real.
                     </p>
                     <div className="lp-hero-actions">
                         <button className="lp-btn primary" onClick={() => onTabChange("production")}>
-                            Ver robos
+                            Ver robôs
                         </button>
                         <button className="lp-btn ghost" onClick={() => onTabChange("scheduler")}>
                             Agendamentos
@@ -96,23 +95,23 @@ function LandingPage({ user, onTabChange }) {
                             {filteredAlerts.length}
                         </div>
                         <div className="metric-sub">
-                            {filteredAlerts.length ? "Requer atencao" : "Tudo sob controle"}
+                            {filteredAlerts.length ? "Requer atenção" : "Tudo sob controle"}
                         </div>
                     </div>
                     <div className="metric-card">
-                        <div className="metric-label">Ultima execução</div>
+                        <div className="metric-label">Última execução</div>
                         <div className="metric-value">
                             {lastExecLabels ? lastExecLabels.timeLabel : "--:--"}
                         </div>
                         <div className="metric-sub">
-                            {lastExecLabels ? `Executado ${lastExecLabels.dayLabel}` : "Sem historico"}
+                            {lastExecLabels ? `Executado ${lastExecLabels.dayLabel}` : "Sem histórico"}
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="section-head">
-                <h3>Acesso rapido</h3>
+                <h3>Acesso rápido</h3>
                 <span className="section-note">Atalhos para as ações mais usadas</span>
             </div>
 
@@ -122,7 +121,7 @@ function LandingPage({ user, onTabChange }) {
                         <RiRobot3Fill />
                     </div>
                     <h3>Robôs Ativos</h3>
-                    <p>Gerencie e monitore todos os robos configurados.</p>
+                    <p>Gerencie e monitore todos os robôs configurados.</p>
                 </div>
 
                 <div className="card" onClick={() => onTabChange("scheduler")}>
@@ -130,16 +129,16 @@ function LandingPage({ user, onTabChange }) {
                         <FiClock />
                     </div>
                     <h3>Agendamentos</h3>
-                    <p>Controle horários e frequencias de execução.</p>
+                    <p>Controle horários e frequências de execução.</p>
                 </div>
 
                 {user.role === "Administrador" && (
                     <>
-                        <div className="card" onClick={() => handleAction("Executar robo")}>
+                        <div className="card" onClick={() => handleAction("Executar robô")}>
                             <div className="icon-area green">
                                 <FiPlayCircle />
                             </div>
-                            <h3>Executar Robo</h3>
+                            <h3>Executar Robô</h3>
                             <p>Inicie execuções sob demanda com segurança.</p>
                         </div>
 
@@ -177,7 +176,7 @@ function LandingPage({ user, onTabChange }) {
             )}
 
             <div className="section-head">
-                <h3>Ultimas execucoes</h3>
+                <h3>Últimas execuções</h3>
                 <span className="section-note">Visão rápida das execuções recentes</span>
             </div>
 
@@ -190,7 +189,7 @@ function LandingPage({ user, onTabChange }) {
                             <div key={robot.Id} className="activity-item">
                                 <FiActivity className="activity-icon" />
                                 <div>
-                                    <strong>Robo - {robot.Nome}</strong>
+                                    <strong>Robô - {robot.Nome}</strong>
                                     <p>
                                         Executado{" "}
                                         {dayLabel === "hoje"
@@ -198,16 +197,14 @@ function LandingPage({ user, onTabChange }) {
                                             : dayLabel === "ontem"
                                             ? "ontem"
                                             : `dia ${dayLabel}`}{" "}
-                                        as {timeLabel}
+                                        às {timeLabel}
                                     </p>
                                 </div>
                             </div>
                         );
                     })
                 ) : (
-                    <div className="activity-empty">
-                        Nenhuma execução recente encontrada.
-                    </div>
+                    <div className="activity-empty">Nenhuma execução recente encontrada.</div>
                 )}
             </div>
 
@@ -219,11 +216,13 @@ function LandingPage({ user, onTabChange }) {
 
                     <h2>Alerta</h2>
                     <p>
-                        A pagina <strong>{selectedPage}</strong> está em desenvolvimento...
+                        A página <strong>{selectedPage}</strong> está em desenvolvimento...
                     </p>
 
                     <div className="confirmacao-buttons">
-                        <button className="btn-nao" onClick={() => setOpenAlert(false)}>Voltar</button>
+                        <button className="btn-nao" onClick={() => setOpenAlert(false)}>
+                            Voltar
+                        </button>
                     </div>
                 </div>
             </Modal>
